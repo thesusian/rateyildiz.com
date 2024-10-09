@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block title %}{{_('Leaderboard')}}{% endblock %}{%
+block extra_head %}
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
+/>
+<script
+    type="text/javascript"
+    charset="utf8"
+    src="https://code.jquery.com/jquery-3.5.1.js"
+></script>
+<script
+    type="text/javascript"
+    charset="utf8"
+    src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
+></script>
+{% endblock %} {% block content %}
+<h2>{{_('Professor Leaderboard')}}</h2>
+<table id="leaderboardTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>{{_('Rank')}}</th>
+            <th>{{_('Professor')}}</th>
+            <th>{{_('English')}}</th>
+            <th>{{_('Friendliness')}}</th>
+            <th>{{_('Knowledge')}}</th>
+            <th>{{_('Total Average')}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for professor in leaderboard_data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td class="name-image">
+                <img
+                    src="{{ 'https://avesis.yildiz.edu.tr/user/image/'+professor.image_id }}"
+                    alt="{{ professor.full_name }}"
+                    height="100"
+                    width="100"
+                />
+                <a
+                    href="{{ url_for('professor_detail', professor_id=professor.id) }}"
+                    >{{ professor.full_name }}</a
+                >
+            </td>
+            <td>{{ "%.2f"|format(professor.avg_english|float) }}</td>
+            <td>{{ "%.2f"|format(professor.avg_friendliness|float) }}</td>
+            <td>{{ "%.2f"|format(professor.avg_knowledge|float) }}</td>
+            <td>{{ "%.2f"|format(professor.avg_total|float) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<style>
+    .name-image {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#leaderboardTable").DataTable({
+            order: [[5, "desc"]], // Sort by Total Average column (index 5) in descending order
+            columnDefs: [
+                { orderable: false, targets: 1 }, // Disable sorting for Professor Name column
+            ],
+            paging: false, // Disable pagination
+            searching: false, // Disable search bar
+            info: false, // Disable "Showing X of Y entries" info
+            lengthChange: false, // Disable "Show X entries" dropdown
+        });
+    });
+</script>
+{% endblock %}

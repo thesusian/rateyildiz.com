@@ -1,0 +1,15 @@
+fastapi
+fastapi-babel
+jinja2
+authlib
+starlette
+python-dotenv
+uvicorn
+itsdangerous
+httpx
+sqlalchemy
+alembic
+resend
+python-jose
+python-multipart
+bs4

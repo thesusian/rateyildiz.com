@@ -1,0 +1,12 @@
+body {
+    padding-top: 20px;
+}
+
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item img {
+    margin-right: 5px;
+}
