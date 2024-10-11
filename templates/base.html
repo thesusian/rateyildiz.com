@@ -22,12 +22,18 @@
                     <img
                         src="/static/ytu-small.png"
                         class="rotating-logo"
-                        style="height: 100px; width: 100px"
+                        style="
+                            height: 100px;
+                            width: 100px;
+                            max-height: 16vw;
+                            max-width: 16vw;
+                        "
                     />
                     <span class="font-weight-bold"
                         >{{ _('Rate Yildiz') }}</span
                     ></a
                 >
+
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -47,8 +53,8 @@
                             >
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/professors"
-                                >{{_('Professors')}}</a
+                            <a class="nav-link" href="/teachers"
+                                >{{_('Teachers')}}</a
                             >
                         </li>
                         {% if user %}
@@ -77,6 +83,51 @@
                             >
                         </li>
                         {% endif %}
+                        <li>
+                            {% if lang == 'tr' %}
+                            <a
+                                class="nav-link"
+                                href="#"
+                                hx-post="/set-lang/en"
+                                hx-trigger="click"
+                                hx-swap="none"
+                                hx-on::after-request="location.reload()"
+                                style="display: flex; align-items: center"
+                            >
+                                <img
+                                    src="/static/uk.svg"
+                                    alt="UK Flag"
+                                    style="
+                                        width: 20px;
+                                        height: 20px;
+                                        margin-right: 5px;
+                                    "
+                                />
+                                English
+                            </a>
+                            {% else %}
+                            <a
+                                class="nav-link"
+                                href="#"
+                                hx-post="/set-lang/tr"
+                                hx-trigger="click"
+                                hx-swap="none"
+                                hx-on::after-request="location.reload()"
+                                style="display: flex; align-items: center"
+                            >
+                                <img
+                                    src="/static/tr.svg"
+                                    alt="Turkish Flag"
+                                    style="
+                                        width: 20px;
+                                        height: 20px;
+                                        margin-right: 5px;
+                                    "
+                                />
+                                Türkçe
+                            </a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>

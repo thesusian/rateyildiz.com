@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}{{_('Professor')}}{% endblock %}{%
+{% extends "base.html" %} {% block title %}{{_('Teacher')}}{% endblock %}{%
 block content %}
 <h1>{{ professor.full_name }}</h1>
 <img
@@ -7,7 +7,7 @@ block content %}
     width="200"
 />
 
-<h2>{{_('Professor Rating')}}</h2>
+<h2>{{_('Teacher Rating')}}</h2>
 <p>
     {{_('English Proficiency')}}: {{ "%.1f"|format(avg_ratings.avg_english if
     avg_ratings.avg_english is not none else 0) }}
@@ -22,8 +22,8 @@ block content %}
 </p>
 
 {% if user %}
-<h2>{{_('Rate this Professor')}}</h2>
-<form action="/professors/{{ professor.id }}/rate" method="post">
+<h2>{{_('Rate this Teachers')}}</h2>
+<form action="/teachers/{{ professor.id }}/rate" method="post">
     <div class="form-group">
         <label for="comment">{{_('Comment')}}</label>
         <textarea class="form-control" id="comment" name="comment">
@@ -80,7 +80,7 @@ block content %}
 <p>
     {{_('Please')}}
     <a href="#" onclick="openLoginPopup()">{{_('login')}}</a> {{_('to rate this
-    professor')}}.
+    teacher')}}.
 </p>
 {% endif %} {% for rating in ratings %}
 <div class="card mb-3">
@@ -99,7 +99,7 @@ block content %}
                 {% endif %} {% if user and (user.id == rating.user_id or
                 user.admin == true) %}
                 <form
-                    action="/professors/{{ professor.id }}/ratings/{{ rating.id }}/delete"
+                    action="/teachers/{{ professor.id }}/ratings/{{ rating.id }}/delete"
                     method="post"
                     style="display: inline"
                 >

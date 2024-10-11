@@ -1,5 +1,5 @@
 fastapi
-fastapi-babel
+pydantic
 jinja2
 authlib
 starlette

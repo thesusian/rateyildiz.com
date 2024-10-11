@@ -1,21 +1,21 @@
-import os
 import re
-import shutil
 
-from fastapi import FastAPI, Request, Depends, HTTPException, Query, Form, File, UploadFile
+from fastapi import FastAPI, Request, Depends, HTTPException, Query, Form, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.security import OAuth2AuthorizationCodeBearer
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+
 from authlib.integrations.starlette_client import OAuth, OAuthError
-from fastapi_babel import Babel, BabelMiddleware, BabelConfigs, _
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.config import Config
 from sqlalchemy.orm import Session
 
-from . import models, crud, email
-from .database import engine, get_db
 from datetime import datetime
+
+from .middleware import LanguageMiddleware
+from .database import engine, get_db
+from . import models, crud, email
+from .i18n import _
 
 # Load environment variables
 config = Config('.env')
@@ -33,30 +33,28 @@ oauth.register(
     client_kwargs={'scope': 'openid email profile'}
 )
 
-# Babel setup
-babel_configs = BabelConfigs(
-    ROOT_DIR='../',
-    BABEL_DEFAULT_LOCALE="en",
-    BABEL_TRANSLATION_DIRECTORY="lang",
-)
-
-babel = Babel(babel_configs)
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
-app.add_middleware(BabelMiddleware, babel_configs=babel_configs, jinja2_templates=templates)
+app.add_middleware(LanguageMiddleware, templates=templates)
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 models.Base.metadata.create_all(bind=engine)
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    babel.locale = "tr"
-    print(_("Account"))
-    print("locale: " + babel.locale)
     user = request.session.get('user')
     return templates.TemplateResponse("home.html", {"request": request, "user": user})
+
+@app.post("/set-lang/{lang}")
+async def set_language(lang: str, request: Request, response: Response):
+    if lang not in ['en', 'tr']:
+        raise HTTPException(status_code=400, detail="Invalid language. Only 'en' and 'tr' are supported.")
+    request.session['language'] = lang
+    referer = request.headers.get('Referer')
+    response = RedirectResponse(referer or "/")
+    return response
 
 @app.get("/login")
 async def login(request: Request):
@@ -181,13 +179,13 @@ async def verify_code(request: Request, db: Session = Depends(get_db), verificat
 
     return templates.TemplateResponse("verify.html", {"request": request, "user": user, "message": "Email verified successfully"})
 
-@app.get("/professors", response_class=HTMLResponse)
+@app.get("/teachers", response_class=HTMLResponse)
 async def list_professors(request: Request, db: Session = Depends(get_db)):
     user = request.session.get('user')
     professors = crud.get_all_professors(db)
-    return templates.TemplateResponse("professors.html", {"request": request, "user": user, "professors": professors})
+    return templates.TemplateResponse("teachers.html", {"request": request, "user": user, "professors": professors})
 
-@app.get("/professors/info/{professor_id}", response_class=HTMLResponse)
+@app.get("/teachers/info/{professor_id}", response_class=HTMLResponse)
 async def professor_detail(request: Request, professor_id: int, db: Session = Depends(get_db)):
     user = request.session.get('user')
     professor = crud.get_professor(db, professor_id)
@@ -202,7 +200,7 @@ async def professor_detail(request: Request, professor_id: int, db: Session = De
         db_user = crud.get_user_by_email(db, user['email'])
         user_rating = crud.get_user_rating_for_professor(db, db_user.id, professor_id)
 
-    return templates.TemplateResponse("professor_detail.html", {
+    return templates.TemplateResponse("teacher_detail.html", {
         "request": request,
         "user": user,
         "professor": professor,
@@ -211,14 +209,14 @@ async def professor_detail(request: Request, professor_id: int, db: Session = De
         "user_rating": user_rating
     })
 
-@app.get("/professors/search", response_class=HTMLResponse)
+@app.get("/teachers/search", response_class=HTMLResponse)
 async def search_professors(request: Request, db: Session = Depends(get_db), q: str = Query(None)):
     user = request.session.get('user')
     if q:
         professors = crud.search_professors(db, q)
     else:
         professors = crud.get_all_professors(db)
-    return templates.TemplateResponse("professors.html", {"request": request, "user": user, "professors": professors, "search_query": q})
+    return templates.TemplateResponse("teachers.html", {"request": request, "user": user, "professors": professors, "search_query": q})
 
 @app.post("/professors/{professor_id}/rate")
 async def rate_professor(
@@ -242,9 +240,9 @@ async def rate_professor(
     else:
         crud.create_rating(db, db_user.id, professor_id, comment, english_proficiency, friendliness, knowledge)
 
-    return RedirectResponse(url=f"/professors/info/{professor_id}", status_code=303)
+    return RedirectResponse(url=f"/teachers/info/{professor_id}", status_code=303)
 
-@app.post("/professors/{professor_id}/ratings/{rating_id}/delete")
+@app.post("/teachers/{professor_id}/ratings/{rating_id}/delete")
 async def delete_rating(
     request: Request,
     professor_id: int,
@@ -261,12 +259,12 @@ async def delete_rating(
     if not rating:
         raise HTTPException(status_code=404, detail="Rating not found")
 
-    if rating.user_id != db_user.id:
+    if rating.user_id != db_user.id and not db_user.admin:
         raise HTTPException(status_code=403, detail="Not authorized to delete this rating")
 
     crud.delete_rating(db, rating_id)
 
-    return RedirectResponse(url=f"/professors/info/{professor_id}", status_code=303)
+    return RedirectResponse(url=f"/teachers/info/{professor_id}", status_code=303)
 
 
 # Leaderboard

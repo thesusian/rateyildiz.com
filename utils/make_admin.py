@@ -1,3 +1,7 @@
+####   README   #### #### #### #### #### #### #### ####
+# Run these scripts from the rateyildiz.com directory #
+#### END README #### #### #### #### #### #### #### ####
+
 import sqlite3
 import sys
 

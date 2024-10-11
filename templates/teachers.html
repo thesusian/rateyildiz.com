@@ -1,17 +1,17 @@
-{% extends "base.html" %} {% block title %}{{_('Professors')}}{% endblock %}{%
+{% extends "base.html" %} {% block title %}{{_('Teachers')}}{% endblock %}{%
 block content %}
-<h2>Professors</h2>
+<h2>Teachers</h2>
 
 <!-- Search Bar -->
 <div class="mb-4">
-    <form action="/professors/search" method="get" class="form-inline">
+    <form action="/teachers/search" method="get" class="form-inline">
         <div class="input-group w-100">
             <input
                 type="text"
                 id="searchBar"
                 name="q"
                 class="form-control"
-                placeholder="{{_('Search professors...')}}"
+                placeholder="{{_('Search teachers...')}}"
                 value="{{ search_query or '' }}"
             />
             <div class="input-group-append">
@@ -41,7 +41,7 @@ block content %}
             <div class="card-body d-flex flex-column justify-content-center">
                 <h5 class="card-title">{{ professor.full_name }}</h5>
                 <a
-                    href="/professors/info/{{ professor.id }}"
+                    href="/teachers/info/{{ professor.id }}"
                     class="btn btn-primary mt-2"
                     style="width: fit-content"
                     >{{_('View Details / Rate')}}</a
@@ -51,7 +51,7 @@ block content %}
     </div>
     {% else %}
     <div class="col-12">
-        <p>{{_('No professors found.')}}</p>
+        <p>{{_('No teachers found.')}}</p>
     </div>
     {% endfor %}
 </div>

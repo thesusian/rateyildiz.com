@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-09 22:15+0300\n"
-"PO-Revision-Date: 2024-10-09 22:15+0300\n"
+"POT-Creation-Date: 2024-10-11 19:24+0300\n"
+"PO-Revision-Date: 2024-10-11 19:25+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
 "Language-Team: tr <LL@li.org>\n"
@@ -24,164 +24,166 @@ msgstr "Hesabim"
 
 #: templates/base.html:6 templates/base.html:28
 msgid "Rate Yildiz"
-msgstr ""
+msgstr "Yildiz'i Değerlendir"
 
 #: templates/base.html:46 templates/leaderboard.html:1
 msgid "Leaderboard"
-msgstr ""
+msgstr "Sıralama"
 
 #: templates/base.html:51 templates/professors.html:1
 msgid "Professors"
-msgstr ""
+msgstr "Profesörler"
 
 #: templates/base.html:76
 msgid "Login"
-msgstr ""
+msgstr "Giriş Yap"
 
 #: templates/home.html:1
 msgid "Home"
-msgstr ""
+msgstr "Ana Sayfa"
 
 #: templates/leaderboard.html:19
 msgid "Professor Leaderboard"
-msgstr ""
+msgstr "Profesör Sıralaması"
 
 #: templates/leaderboard.html:23
 msgid "Rank"
-msgstr ""
+msgstr "Sıra"
 
 #: templates/leaderboard.html:24 templates/professor_detail.html:1
 msgid "Professor"
-msgstr ""
+msgstr "Profesör"
 
 #: templates/leaderboard.html:25
 msgid "English"
-msgstr ""
+msgstr "İngilizce"
 
 #: templates/leaderboard.html:26 templates/professor_detail.html:16
 #: templates/professor_detail.html:48 templates/professor_detail.html:121
 msgid "Friendliness"
-msgstr ""
+msgstr "Arkadaşça Yaklaşım"
 
 #: templates/leaderboard.html:27 templates/professor_detail.html:20
 #: templates/professor_detail.html:62 templates/professor_detail.html:123
 msgid "Knowledge"
-msgstr ""
+msgstr "Bilgi"
 
 #: templates/leaderboard.html:28
 msgid "Total Average"
-msgstr ""
+msgstr "Toplam Ortalama"
 
 #: templates/professor_detail.html:10
 msgid "Professor Rating"
-msgstr ""
+msgstr "Profesör Değerlendirmesi"
 
 #: templates/professor_detail.html:12 templates/professor_detail.html:34
 #: templates/professor_detail.html:118
 msgid "English Proficiency"
-msgstr ""
+msgstr "İngilizce Yeterliliği"
 
 #: templates/professor_detail.html:25
 msgid "Rate this Professor"
-msgstr ""
+msgstr "Bu Profesörü Değerlendir"
 
 #: templates/professor_detail.html:28
 msgid "Comment"
-msgstr ""
+msgstr "Yorum"
 
 #: templates/professor_detail.html:76
 msgid "Submit Rating"
-msgstr ""
+msgstr "Değerlendirmeyi Gönder"
 
 #: templates/professor_detail.html:81
 msgid "Please"
-msgstr ""
+msgstr "Lütfen"
 
 #: templates/professor_detail.html:82
 msgid "login"
-msgstr ""
+msgstr "giriş yapın"
 
 #: templates/professor_detail.html:82
 msgid ""
 "to rate this\n"
 "    professor"
 msgstr ""
+"bu profesörü\n"
+"    değerlendirmek için"
 
 #: templates/professor_detail.html:92
 msgid "Verified Student"
-msgstr ""
+msgstr "Doğrulanmış Öğrenci"
 
 #: templates/professor_detail.html:95
 msgid "Verify Account"
-msgstr ""
+msgstr "Hesabı Doğrula"
 
 #: templates/professor_detail.html:98
 msgid "Unverified"
-msgstr ""
+msgstr "Doğrulanmamış"
 
 #: templates/professor_detail.html:109
 msgid "Are you sure you want to delete your rating?"
-msgstr ""
+msgstr "Değerlendirmenizi silmek istediğinizden emin misiniz?"
 
 #: templates/professor_detail.html:111
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 #: templates/professor_detail.html:126
 msgid "Rated on"
-msgstr ""
+msgstr "Değerlendirilme tarihi"
 
 #: templates/professors.html:14
 msgid "Search professors..."
-msgstr ""
+msgstr "Profesör ara..."
 
 #: templates/professors.html:19
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: templates/professors.html:47
 msgid "View Details / Rate"
-msgstr ""
+msgstr "Detayları Görüntüle / Değerlendir"
 
 #: templates/professors.html:54
 msgid "No professors found."
-msgstr ""
+msgstr "Profesör bulunamadı."
 
 #: templates/verify.html:1
 msgid "Verify Student Email"
-msgstr ""
+msgstr "Öğrenci E-postasını Doğrula"
 
 #: templates/verify.html:3
 msgid "Verify Your Student Email"
-msgstr ""
+msgstr "Öğrenci E-postanızı Doğrulayın"
 
 #: templates/verify.html:12
 msgid "Yildiz Student Email"
-msgstr ""
+msgstr "Yildiz Öğrenci E-postası"
 
 #: templates/verify.html:23
 msgid "Send Verification Code"
-msgstr ""
+msgstr "Doğrulama Kodu Gönder"
 
 #: templates/verify.html:30
 msgid "Verification Code"
-msgstr ""
+msgstr "Doğrulama Kodu"
 
 #: templates/verify.html:40
 msgid "Verify Code"
-msgstr ""
+msgstr "Kodu Doğrula"
 
 #: templates/verify.html:44
 msgid "Your student email"
-msgstr ""
+msgstr "Öğrenci e-postanız"
 
 #: templates/verify.html:44
 msgid ""
 "has been\n"
 "    verified"
 msgstr ""
+"doğrulandı"
 
 #: templates/verify.html:48
 msgid "Please log in to verify your student email"
-msgstr ""
-
+msgstr "Öğrenci e-postanızı doğrulamak için lütfen giriş yapın"
