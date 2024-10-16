@@ -5,5 +5,5 @@ if [[ $(basename "$PWD") != "rateyildiz.com" ]]; then
 fi
 
 # Run Babel commands
-pybabel extract -F babel.cfg -o messages.pot .
+pybabel extract -F babel.cfg -o translations/messages.pot .
 pybabel init -i translations/messages.pot -d translations -l tr

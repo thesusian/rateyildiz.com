@@ -24,12 +24,16 @@ block content %}
 {% if user %}
 <h2>{{_('Rate this Teachers')}}</h2>
 <form action="/teachers/{{ professor.id }}/rate" method="post">
+    {% if user.verified %}
     <div class="form-group">
         <label for="comment">{{_('Comment')}}</label>
         <textarea class="form-control" id="comment" name="comment">
 {{ user_rating.comment if user_rating else '' }}</textarea
         >
     </div>
+    {% else %}
+    <p>{{_('You must be a verified user to leave a comment.')}}</p>
+    {% endif %}
     <div class="form-group">
         <label for="english_proficiency">{{_('English Proficiency')}}</label>
         <input

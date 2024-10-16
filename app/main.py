@@ -43,9 +43,16 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 models.Base.metadata.create_all(bind=engine)
 
 @app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
+async def home(request: Request, db: Session = Depends(get_db)):
     user = request.session.get('user')
-    return templates.TemplateResponse("home.html", {"request": request, "user": user})
+    top_professors = crud.get_leaderboard_data(db)[:5]  # Get top 5 professors
+    recent_reviews = crud.get_recent_reviews(db)  # Get recent reviews
+    return templates.TemplateResponse("home.html", {
+        "request": request,
+        "user": user,
+        "top_professors": top_professors,
+        "recent_reviews": recent_reviews
+    })
 
 @app.post("/set-lang/{lang}")
 async def set_language(lang: str, request: Request, response: Response):
@@ -218,12 +225,12 @@ async def search_professors(request: Request, db: Session = Depends(get_db), q: 
         professors = crud.get_all_professors(db)
     return templates.TemplateResponse("teachers.html", {"request": request, "user": user, "professors": professors, "search_query": q})
 
-@app.post("/professors/{professor_id}/rate")
+@app.post("/teachers/{professor_id}/rate")
 async def rate_professor(
     request: Request,
     professor_id: int,
     db: Session = Depends(get_db),
-    comment: str = Form(...),
+    comment: str = Form(default=""),
     english_proficiency: int = Form(...),
     friendliness: int = Form(...),
     knowledge: int = Form(...)
@@ -234,6 +241,8 @@ async def rate_professor(
 
     db_user = crud.get_user_by_email(db, user['email'])
     existing_rating = crud.get_user_rating_for_professor(db, db_user.id, professor_id)
+
+    if not user.get('verified'): comment = ""
 
     if existing_rating:
         crud.update_rating(db, existing_rating.id, comment, english_proficiency, friendliness, knowledge)
@@ -279,6 +288,73 @@ async def leaderboard(request: Request, db: Session = Depends(get_db)):
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
     return HTMLResponse(f"<h1>Error {exc.status_code}</h1><p>{exc.detail}</p>")
+
+
+# Faculties
+
+@app.get("/faculty/{faculty_id}", response_class=HTMLResponse)
+async def list_faculty_professors(request: Request, faculty_id: int, db: Session = Depends(get_db)):
+    user = request.session.get('user')
+    faculty_dict = {
+        16: "Faculty of Naval Architecture and Maritime",
+        10: "Faculty of Civil Engineering",
+        3: "Faculty of Chemical and Metallurgical Engineering",
+        18: "Institute of Clean Energy Technologies",
+        1: "Rectorate",
+        2: "Faculty of Architecture",
+        4: "Faculty of Mechanical Engineering",
+        5: "Institute of Science and Technology",
+        6: "Institute of Social Sciences",
+        7: "Vocational School",
+        8: "Faculty of Electrical and Electronics Engineering",
+        9: "Faculty of Arts and Sciences",
+        11: "Faculty of Economics and Administrative Sciences",
+        12: "Faculty of Art and Design",
+        13: "School of Foreign Languages",
+        14: "Faculty of Education",
+        23: "Faculty of Applied Sciences",
+        15: "National Palaces and Historical Buildings Vocational School"
+    }
+    if faculty_id not in faculty_dict:
+        raise HTTPException(status_code=404, detail="Faculty not found")
+
+    professors = crud.get_professors_by_faculty(db, faculty_id)
+    faculty_name = faculty_dict[faculty_id]
+    return templates.TemplateResponse("faculty_professors.html", {
+        "request": request,
+        "user": user,
+        "professors": professors,
+        "faculty_name": faculty_name
+    })
+
+@app.get("/faculty", response_class=HTMLResponse)
+async def list_faculties(request: Request):
+    user = request.session.get('user')
+    faculties = {
+        16: "Faculty of Naval Architecture and Maritime",
+        10: "Faculty of Civil Engineering",
+        3: "Faculty of Chemical and Metallurgical Engineering",
+        18: "Institute of Clean Energy Technologies",
+        1: "Rectorate",
+        2: "Faculty of Architecture",
+        4: "Faculty of Mechanical Engineering",
+        5: "Institute of Science and Technology",
+        6: "Institute of Social Sciences",
+        7: "Vocational School",
+        8: "Faculty of Electrical and Electronics Engineering",
+        9: "Faculty of Arts and Sciences",
+        11: "Faculty of Economics and Administrative Sciences",
+        12: "Faculty of Art and Design",
+        13: "School of Foreign Languages",
+        14: "Faculty of Education",
+        23: "Faculty of Applied Sciences",
+        15: "National Palaces and Historical Buildings Vocational School"
+    }
+    return templates.TemplateResponse("faculties.html", {
+        "request": request,
+        "user": user,
+        "faculties": faculties
+    })
 
 if __name__ == "__main__":
     import uvicorn

@@ -92,6 +92,8 @@ def delete_professor(db: Session, professor_id: int):
         db.commit()
     return db_professor
 
+def get_professors_by_faculty(db: Session, faculty_id: int):
+    return db.query(models.Professor).filter(models.Professor.faculty_id == faculty_id).all()
 
 # Rating ops
 
@@ -145,6 +147,16 @@ def delete_rating(db: Session, rating_id: int):
         db.delete(db_rating)
         db.commit()
     return db_rating
+
+def get_recent_reviews(db: Session, limit: int = 5):
+    return (db.query(models.Rating)
+            .filter(models.Rating.comment != "")
+            .order_by(models.Rating.created_at.desc())
+            .limit(limit)
+            .all())
+
+
+# Leaderboard ops
 
 @timer_decorator
 def get_leaderboard_data(db: Session):

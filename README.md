@@ -1,10 +1,15 @@
 # Rate Yildiz
 
+A little website for rating teachers in YTU
+
 ## To Do
 
 * block the user if they enter too many wrong verification codes
-* add leaderboard and teachers pages for each faculity
-* only verified users can comment
+* fix footer placment
+* favicon, sitemap, robots.txt
+* stars
+* better search, replace turkish letters for english
+* fix leaderboard on mobile
 
 ## Notes
 

@@ -38,6 +38,8 @@ block extra_head %}
                     alt="{{ professor.full_name }}"
                     height="100"
                     width="100"
+                    loading="lazy"
+                    style="border-radius: 5px"
                 />
                 <a
                     href="{{ url_for('professor_detail', professor_id=professor.id) }}"

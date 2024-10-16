@@ -16,7 +16,9 @@
         {% block extra_head %}{% endblock %}
     </head>
     <body class="p-0">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-2 border-dark"
+        >
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <img
@@ -55,6 +57,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/teachers"
                                 >{{_('Teachers')}}</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/faculty"
+                                >{{_('Faculties')}}</a
                             >
                         </li>
                         {% if user %}
@@ -133,7 +140,23 @@
             </div>
         </nav>
 
-        <div class="container mt-4">{% block content %}{% endblock %}</div>
+        <!-- I don't care, it works -->
+        <div class="container mt-4" style="min-height: calc(100vh - 210px)">
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer
+            class="bg-light border-top border-2 border-dark bg-gradient p-2 d-flex justify-content-center align-items-center gap-4"
+        >
+            <a href="https://htmx.org"
+                ><img
+                    src="/static/createdwithhtmx.jpeg"
+                    style="max-height: 40px"
+            /></a>
+            <span>no rights reserved, feel free to copy anything</span>
+            <a href="mailto:thesusian@riseup.net">{{_('contact')}}</a>
+        </footer>
+
         <style>
             @keyframes rotate {
                 from {

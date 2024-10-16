@@ -1,30 +1,34 @@
 {% extends "base.html" %} {% block title %}{{_('Account')}}{% endblock %} {%
 block content %}
-<h2>Account Information</h2>
+<h2>{{_('Account Information')}}</h2>
 {% if user %}
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">{{ user.name }}</h5>
-        <p class="card-text">Email: {{ user.email }}</p>
+        <p class="card-text">{{_('Email')}}: {{ user.email }}</p>
         {% if user.admin %}
-        <p class="card-text">Account Type: Admin</p>
+        <p class="card-text">{{_('Account Type')}}: {{_('Admin')}}</p>
         {% endif %} {% if user.verified %}
-        <p class="card-text">Status: Verified</p>
-        <p class="card-text">Student Email: {{ user.student_email }}</p>
+        <p class="card-text">{{_('Status')}}: {{_('Verified')}}</p>
+        <p class="card-text">
+            {{_('Student Email')}}: {{ user.student_email }}
+        </p>
         {% else %}
-        <p class="card-text">Status: Not Verified</p>
-        <a href="/verify" class="btn btn-primary">Verify Student Email</a>
+        <p class="card-text">{{_('Status')}}: {{_('Not Verified')}}</p>
+        <a href="/verify" class="btn btn-primary"
+            >{{_('Verify Student Email')}}</a
+        >
         <a
             class="btn btn-primary"
             href="#"
             hx-get="/logout"
             hx-swap="none"
             hx-on="htmx:afterRequest: window.location.reload()"
-            >Logout</a
+            >{{_('Logout')}}</a
         >
         {% endif %}
     </div>
 </div>
 {% else %}
-<p>Please log in to view your account information.</p>
+<p>{{_('Please log in to view your account information.')}}</p>
 {% endif %} {% endblock %}

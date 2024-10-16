@@ -1,7 +1,115 @@
 {% extends "base.html" %} {% block title %}{{_('Home')}}{% endblock %} {% block
 content %}
-<div class="text-center">
-    <h1 class="display-4">Welcome to Rate Yildiz</h1>
-    <p class="lead">Something something rating teachers</p>
+<div class="text-center mb-5 d-grid gap-3">
+    <h1 class="display-4">{{_('Rate YTU')}}</h1>
+    <p class="lead">
+        {{_('A little website for rating teachers in YTU, don\'t take it
+        seriously')}}
+    </p>
+    <div class="text-center d-flex flex-wrap gap-3 justify-content-center">
+        <a href="/teachers" class="btn btn-primary btn-md"
+            >{{_('View All Professors')}}</a
+        >
+        <a href="/faculty" class="btn btn-primary btn-md"
+            >{{_('View By Faculty')}}</a
+        >
+    </div>
+    <div class="mb-4">
+        <form action="/teachers/search" method="get" class="form-inline">
+            <div class="input-group w-100">
+                <input
+                    type="text"
+                    id="searchBar"
+                    name="q"
+                    class="form-control"
+                    placeholder="{{_('Search teachers...')}}"
+                    value="{{ search_query or '' }}"
+                />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        {{_('Search')}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-4">
+        <h2>{{_('Top Rated Teachers')}}</h2>
+        {% if top_professors %}
+        <ol>
+            {% for professor in top_professors %}
+            <li>
+                <img
+                    src="{{ 'https://avesis.yildiz.edu.tr/user/image/'+professor.image_id }}"
+                    alt="{{ professor.full_name }}"
+                    style="
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        margin: 10px;
+                    "
+                />
+                (<em class="fw-bold"
+                    >{{ "%.1f"|format(professor.avg_total/10|float) }}</em
+                >/5)
+                <a
+                    href="{{ url_for('professor_detail', professor_id=professor.id) }}"
+                >
+                    {{ professor.full_name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ol>
+        {% else %}
+        <p>{{_('No teachers rated yet.')}}</p>
+        {% endif %}
+        <div class="text-center d-flex flex-wrap gap-3 justify-content-center">
+            <a href="/leaderboard" class="btn btn-primary btn-md"
+                >{{_('View Full Leaderboard')}}</a
+            >
+        </div>
+    </div>
+    <div class="col-md-4 mt-4">
+        <h2>{{_('Recent Reviews')}}</h2>
+        {% for review in recent_reviews %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p class="card-text">
+                    "{{ review.comment }}" - {{_('Anonymous')}}
+                </p>
+                <small class="text-muted">
+                    {{_('For Professor:')}}
+                    <a
+                        href="{{ url_for('professor_detail', professor_id=review.professor_id) }}"
+                        >{{ review.professor.full_name }}</a
+                    >
+                </small>
+            </div>
+        </div>
+        {% else %}
+        <p>{{_('No recent reviews available.')}}</p>
+        {% endfor %}
+    </div>
+    <div class="col-md-4 mt-4">
+        <h2>{{_('About Rate Yildiz')}}</h2>
+        <p>
+            {{_('This a small website to rate teachers at Yildiz Technical
+            Univerity, why? for fun. You can translate the website to Turkish
+            from the menu above.')}}
+        </p>
+        <p>
+            {{_('By logging in, you can rate professors without comments, to be
+            able to comment you have to verify your account using your student
+            email ending with "std.yildiz.edu.tr", you can do that')}}
+            <a href="/account">{{_('on the Account page.')}}</a>
+        </p>
+        <p>
+            {{_('And a final note, please don\'t make any mean comments, keep it
+            wholesome :D')}}
+        </p>
+    </div>
 </div>
 {% endblock %}
