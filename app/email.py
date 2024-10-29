@@ -11,7 +11,7 @@ def send_verification_email(to_email: str, verification_code: str):
     to_email="mhmd7by7@gmail.com"
     try:
         resend.Emails.send({
-            "from": "Rate Yildiz <noreply@rateyildiz.com>",
+            "from": "Rate Yildiz <noreply@resend.dev>",
             "to": to_email,
             "subject": "Verify your student email for Rate Yildiz",
             "html": f"""

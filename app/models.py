@@ -17,6 +17,8 @@ class User(Base):
     locale = Column(String(50), nullable=True)
     verification_code = Column(String(64), nullable=True)
     verification_code_expires = Column(DateTime, nullable=True)
+    verification_attempts = Column(Integer, default=0)
+    last_verification_attempt = Column(DateTime, nullable=True)
 
 class Professor(Base):
     __tablename__ = "professors"

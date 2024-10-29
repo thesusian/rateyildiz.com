@@ -1,8 +1,15 @@
 {% extends "base.html" %} {% block title %}{{_('Faculty Professors')}}{%
 endblock %} {% block content %}
-<div class="d-flex justify-content-between align-items-center">
+<div>
     <h2>{{ faculty_name }}</h2>
-    <a href="/faculty" class="btn btn-secondary">{{_('All Faculties')}}</a>
+    <div class="mt-2">
+        <a
+            href="/faculty/{{ faculty_id }}/leaderboard"
+            class="btn btn-primary me-2"
+            >{{_('Faculty Leaderboard')}}</a
+        >
+        <a href="/faculty" class="btn btn-secondary">{{_('All Faculties')}}</a>
+    </div>
 </div>
 
 <div class="my-4">

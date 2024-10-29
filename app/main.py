@@ -17,6 +17,27 @@ from .database import engine, get_db
 from . import models, crud, email
 from .i18n import _
 
+faculty_dict = {
+    16: "Faculty of Naval Architecture and Maritime",
+    10: "Faculty of Civil Engineering",
+    3: "Faculty of Chemical and Metallurgical Engineering",
+    18: "Institute of Clean Energy Technologies",
+    1: "Rectorate",
+    2: "Faculty of Architecture",
+    4: "Faculty of Mechanical Engineering",
+    5: "Institute of Science and Technology",
+    6: "Institute of Social Sciences",
+    7: "Vocational School",
+    8: "Faculty of Electrical and Electronics Engineering",
+    9: "Faculty of Arts and Sciences",
+    11: "Faculty of Economics and Administrative Sciences",
+    12: "Faculty of Art and Design",
+    13: "School of Foreign Languages",
+    14: "Faculty of Education",
+    23: "Faculty of Applied Sciences",
+    15: "National Palaces and Historical Buildings Vocational School"
+}
+
 # Load environment variables
 config = Config('.env')
 GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID', cast=str)
@@ -53,6 +74,24 @@ async def home(request: Request, db: Session = Depends(get_db)):
         "top_professors": top_professors,
         "recent_reviews": recent_reviews
     })
+
+@app.get("/robots.txt")
+async def robots():
+    return Response(content="User-agent: *\nAllow: /", media_type="text/plain")
+
+@app.get("/sitemap.xml")
+async def sitemap():
+    return Response(content="""<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url><loc>https://rateyuprofessors.com/</loc></url>
+        <url><loc>https://rateyuprofessors.com/teachers</loc></url>
+        <url><loc>https://rateyuprofessors.com/leaderboard</loc></url>
+        <url><loc>https://rateyuprofessors.com/faculty</loc></url>
+    </urlset>""", media_type="application/xml")
+
+@app.get("/favicon.ico")
+async def favicon():
+    return Response(content=open("static/favicon.ico", "rb").read(), media_type="image/x-icon")
 
 @app.post("/set-lang/{lang}")
 async def set_language(lang: str, request: Request, response: Response):
@@ -151,7 +190,7 @@ async def verify_email(request: Request, db: Session = Depends(get_db), student_
 
     # Check if the email is already used
     existing_user = crud.get_user_by_student_email(db, student_email)
-    if existing_user:
+    if existing_user and existing_user.verified:
         return templates.TemplateResponse("verify.html", {"request": request, "user": user, "error": "This student email is already verified"})
 
     db_user = crud.get_user_by_email(db, user['email'])
@@ -173,18 +212,41 @@ async def verify_code(request: Request, db: Session = Depends(get_db), verificat
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    if db_user.verification_code != verification_code: # type: ignore
-        return templates.TemplateResponse("verify.html", {"request": request, "user": user, "error": "Invalid verification code"})
+    # Check if user has exceeded maximum attempts
+    if db_user.verification_attempts >= 5:
+        return templates.TemplateResponse("verify.html", {
+            "request": request,
+            "user": user,
+            "error": "Maximum verification attempts exceeded. Please request a new code."
+        })
 
-    if db_user.verification_code_expires < datetime.utcnow(): # type: ignore
-        return templates.TemplateResponse("verify.html", {"request": request, "user": user, "error": "Verification code expired"})
+    # Verify the code
+    if db_user.verification_code != verification_code:
+        crud.increment_verification_attempts(db, db_user)
+        remaining_attempts = 5 - db_user.verification_attempts
+        return templates.TemplateResponse("verify.html", {
+            "request": request,
+            "user": user,
+            "error": f"Invalid verification code. {remaining_attempts} attempts remaining."
+        })
+
+    if db_user.verification_code_expires < datetime.utcnow():
+        return templates.TemplateResponse("verify.html", {
+            "request": request,
+            "user": user,
+            "error": "Verification code expired"
+        })
 
     crud.verify_user(db, db_user, str(db_user.student_email))
     user['verified'] = True
     user['student_email'] = db_user.student_email
     request.session['user'] = user
 
-    return templates.TemplateResponse("verify.html", {"request": request, "user": user, "message": "Email verified successfully"})
+    return templates.TemplateResponse("verify.html", {
+        "request": request,
+        "user": user,
+        "message": "Email verified successfully"
+    })
 
 @app.get("/teachers", response_class=HTMLResponse)
 async def list_professors(request: Request, db: Session = Depends(get_db)):
@@ -295,26 +357,7 @@ async def http_exception_handler(request: Request, exc: HTTPException):
 @app.get("/faculty/{faculty_id}", response_class=HTMLResponse)
 async def list_faculty_professors(request: Request, faculty_id: int, db: Session = Depends(get_db)):
     user = request.session.get('user')
-    faculty_dict = {
-        16: "Faculty of Naval Architecture and Maritime",
-        10: "Faculty of Civil Engineering",
-        3: "Faculty of Chemical and Metallurgical Engineering",
-        18: "Institute of Clean Energy Technologies",
-        1: "Rectorate",
-        2: "Faculty of Architecture",
-        4: "Faculty of Mechanical Engineering",
-        5: "Institute of Science and Technology",
-        6: "Institute of Social Sciences",
-        7: "Vocational School",
-        8: "Faculty of Electrical and Electronics Engineering",
-        9: "Faculty of Arts and Sciences",
-        11: "Faculty of Economics and Administrative Sciences",
-        12: "Faculty of Art and Design",
-        13: "School of Foreign Languages",
-        14: "Faculty of Education",
-        23: "Faculty of Applied Sciences",
-        15: "National Palaces and Historical Buildings Vocational School"
-    }
+
     if faculty_id not in faculty_dict:
         raise HTTPException(status_code=404, detail="Faculty not found")
 
@@ -324,36 +367,35 @@ async def list_faculty_professors(request: Request, faculty_id: int, db: Session
         "request": request,
         "user": user,
         "professors": professors,
-        "faculty_name": faculty_name
+        "faculty_name": faculty_name,
+        "faculty_id": faculty_id
     })
 
 @app.get("/faculty", response_class=HTMLResponse)
 async def list_faculties(request: Request):
     user = request.session.get('user')
-    faculties = {
-        16: "Faculty of Naval Architecture and Maritime",
-        10: "Faculty of Civil Engineering",
-        3: "Faculty of Chemical and Metallurgical Engineering",
-        18: "Institute of Clean Energy Technologies",
-        1: "Rectorate",
-        2: "Faculty of Architecture",
-        4: "Faculty of Mechanical Engineering",
-        5: "Institute of Science and Technology",
-        6: "Institute of Social Sciences",
-        7: "Vocational School",
-        8: "Faculty of Electrical and Electronics Engineering",
-        9: "Faculty of Arts and Sciences",
-        11: "Faculty of Economics and Administrative Sciences",
-        12: "Faculty of Art and Design",
-        13: "School of Foreign Languages",
-        14: "Faculty of Education",
-        23: "Faculty of Applied Sciences",
-        15: "National Palaces and Historical Buildings Vocational School"
-    }
+
     return templates.TemplateResponse("faculties.html", {
         "request": request,
         "user": user,
-        "faculties": faculties
+        "faculties": faculty_dict
+    })
+
+@app.get("/faculty/{faculty_id}/leaderboard", response_class=HTMLResponse)
+async def faculty_leaderboard(request: Request, faculty_id: int, db: Session = Depends(get_db)):
+    user = request.session.get('user')
+
+    if faculty_id not in faculty_dict:
+        raise HTTPException(status_code=404, detail="Faculty not found")
+
+    faculty_name = faculty_dict[faculty_id]
+    leaderboard_data = crud.get_faculty_leaderboard_data(db, faculty_id)
+
+    return templates.TemplateResponse("faculty_leaderboard.html", {
+        "request": request,
+        "user": user,
+        "faculty_name": faculty_name,
+        "leaderboard_data": leaderboard_data
     })
 
 if __name__ == "__main__":

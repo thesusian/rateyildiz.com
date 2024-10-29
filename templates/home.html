@@ -35,7 +35,7 @@ content %}
     </div>
 </div>
 
-<div class="row mb-5">
+<div class="row mb-5" style="row-gap: 3rem">
     <div class="col-md-4">
         <h2>{{_('Top Rated Teachers')}}</h2>
         {% if top_professors %}
@@ -72,7 +72,7 @@ content %}
             >
         </div>
     </div>
-    <div class="col-md-4 mt-4">
+    <div class="col-md-4">
         <h2>{{_('Recent Reviews')}}</h2>
         {% for review in recent_reviews %}
         <div class="card mb-2">
@@ -93,7 +93,7 @@ content %}
         <p>{{_('No recent reviews available.')}}</p>
         {% endfor %}
     </div>
-    <div class="col-md-4 mt-4">
+    <div class="col-md-4">
         <h2>{{_('About Rate Yildiz')}}</h2>
         <p>
             {{_('This a small website to rate teachers at Yildiz Technical

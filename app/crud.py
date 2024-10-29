@@ -29,6 +29,30 @@ def set_verification_code_email(db: Session, user: models.User, student_email: s
     db.refresh(user)
     return code
 
+def reset_verification_attempts(db: Session, user: models.User):
+    user.verification_attempts = 0
+    user.last_verification_attempt = None
+    db.commit()
+    db.refresh(user)
+
+def increment_verification_attempts(db: Session, user: models.User):
+    user.verification_attempts += 1
+    user.last_verification_attempt = datetime.utcnow()
+    db.commit()
+    db.refresh(user)
+
+# Update set_verification_code_email function
+def set_verification_code_email(db: Session, user: models.User, student_email: str):
+    code = ''.join(random.choices(string.digits, k=6))
+    user.student_email = student_email
+    user.verification_code = code
+    user.verification_code_expires = datetime.utcnow() + timedelta(hours=24)
+    user.verification_attempts = 0  # Reset attempts when new code is generated
+    user.last_verification_attempt = None
+    db.commit()
+    db.refresh(user)
+    return code
+
 def verify_user(db: Session, user: models.User, student_email: str):
     user.verified = True  # type: ignore
     user.student_email = student_email  # type: ignore
@@ -71,10 +95,45 @@ def get_professor(db: Session, professor_id: int):
     return db.query(models.Professor).filter(models.Professor.id == professor_id).first()
 
 def get_all_professors(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Professor).order_by(func.random()).limit(100).all()
+    return db.query(models.Professor).order_by(func.random()).all()
 
 def search_professors(db: Session, query: str):
-    return db.query(models.Professor).filter(models.Professor.full_name.ilike(f"%{query}%")).all()
+    def replace_turkish_chars(text):
+        replacements = {
+            'ı': 'i', 'İ': 'I', 'ğ': 'g', 'Ğ': 'G',
+            'ü': 'u', 'Ü': 'U', 'ş': 's', 'Ş': 'S',
+            'ö': 'o', 'Ö': 'O', 'ç': 'c', 'Ç': 'C'
+        }
+        for turkish, english in replacements.items():
+            text = text.replace(turkish, english)
+        return text
+
+    normalized_query = replace_turkish_chars(query.lower())
+    # Split query into individual characters and join with wildcards
+    search_pattern = '%'.join(list(normalized_query)) + '%'
+    return db.query(models.Professor).filter(
+        func.lower(
+            func.replace(
+                func.replace(
+                    func.replace(
+                        func.replace(
+                            func.replace(
+                                func.replace(
+                                    models.Professor.full_name,
+                                    'ı', 'i'
+                                ),
+                                'ğ', 'g'
+                            ),
+                            'ü', 'u'
+                        ),
+                        'ş', 's'
+                    ),
+                    'ö', 'o'
+                ),
+                'ç', 'c'
+            )
+        ).ilike(f"%{search_pattern}")
+    ).all()
 
 def update_professor(db: Session, professor_id: int, full_name: str, image_url: str):
     db_professor = get_professor(db, professor_id)
@@ -199,3 +258,14 @@ def get_leaderboard_data_subq(db: Session):
         .limit(100)
         .all()
     )
+
+def get_faculty_leaderboard_data(db: Session, faculty_id: int):
+    return db.query(
+        models.Professor.id,
+        models.Professor.full_name,
+        models.Professor.image_id,
+        func.avg(models.Rating.english_proficiency).label('avg_english'),
+        func.avg(models.Rating.friendliness).label('avg_friendliness'),
+        func.avg(models.Rating.knowledge).label('avg_knowledge'),
+        ((func.avg(models.Rating.english_proficiency) + func.avg(models.Rating.friendliness) + func.avg(models.Rating.knowledge)) / 3.0).label('avg_total')
+    ).join(models.Rating).filter(models.Professor.faculty_id == faculty_id).group_by(models.Professor.id).order_by(desc('avg_total')).all()

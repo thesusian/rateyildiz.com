@@ -1,107 +1,223 @@
-{% extends "base.html" %} {% block title %}{{_('Teacher')}}{% endblock %}{%
+{% extends "base.html" %} {% block title %}{{_('Teacher')}}{% endblock %} {%
 block content %}
-<h1>{{ professor.full_name }}</h1>
-<img
-    src="{{ 'https://avesis.yildiz.edu.tr/user/image/'+professor.image_id }}"
-    alt="{{ professor.full_name }}"
-    width="200"
-/>
 
-<h2>{{_('Teacher Rating')}}</h2>
-<p>
-    {{_('English Proficiency')}}: {{ "%.1f"|format(avg_ratings.avg_english if
-    avg_ratings.avg_english is not none else 0) }}
-</p>
-<p>
-    {{_('Friendliness')}}: {{ "%.1f"|format(avg_ratings.avg_friendliness if
-    avg_ratings.avg_friendliness is not none else 0) }}
-</p>
-<p>
-    {{_('Knowledge')}}: {{ "%.1f"|format(avg_ratings.avg_knowledge if
-    avg_ratings.avg_knowledge is not none else 0) }}
-</p>
+<div class="container">
+    <!-- Teacher Profile Section -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img
+                        src="{{ 'https://avesis.yildiz.edu.tr/user/image/'+professor.image_id }}"
+                        alt="{{ professor.full_name }}"
+                        class="img-fluid rounded shadow"
+                        style="max-width: 200px"
+                    />
+                </div>
+                <div class="col-md-9">
+                    <h1 class="mb-4">{{ professor.full_name }}</h1>
 
-{% if user %}
-<h2>{{_('Rate this Teachers')}}</h2>
-<form action="/teachers/{{ professor.id }}/rate" method="post">
-    {% if user.verified %}
-    <div class="form-group">
-        <label for="comment">{{_('Comment')}}</label>
-        <textarea class="form-control" id="comment" name="comment">
+                    <!-- Rating Summary -->
+                    <div class="rating-summary mb-4">
+                        <h4 class="mb-3">{{_('Overall Rating')}}</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div
+                                    class="rating-box text-center p-3 border rounded"
+                                >
+                                    <h5>{{_('English')}}</h5>
+                                    <h3 class="text-primary">
+                                        {{
+                                        "%.1f"|format(avg_ratings.avg_english/5
+                                        if avg_ratings.avg_english is not none
+                                        else 0) }}/5
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div
+                                    class="rating-box text-center p-3 border rounded"
+                                >
+                                    <h5>{{_('Friendliness')}}</h5>
+                                    <h3 class="text-primary">
+                                        {{
+                                        "%.1f"|format(avg_ratings.avg_friendliness/5
+                                        if avg_ratings.avg_friendliness is not
+                                        none else 0) }}/5
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div
+                                    class="rating-box text-center p-3 border rounded"
+                                >
+                                    <h5>{{_('Knowledge')}}</h5>
+                                    <h3 class="text-primary">
+                                        {{
+                                        "%.1f"|format(avg_ratings.avg_knowledge/5
+                                        if avg_ratings.avg_knowledge is not none
+                                        else 0) }}/5
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Form Section -->
+    {% if user %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="card-title mb-4">{{_('Rate this Teacher')}}</h3>
+            <form action="/teachers/{{ professor.id }}/rate" method="post">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="english_proficiency" class="form-label"
+                            >{{_('English Proficiency')}}</label
+                        >
+                        <input
+                            type="range"
+                            class="form-range"
+                            id="english_proficiency"
+                            name="english_proficiency"
+                            min="5"
+                            max="50"
+                            step="5"
+                            value="{{ user_rating.english_proficiency if user_rating else 25 }}"
+                            oninput="this.nextElementSibling.value = this.value/10"
+                        />
+                        <output
+                            >{{ (user_rating.english_proficiency if user_rating
+                            else 25)/10 }}</output
+                        >/5
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="friendliness" class="form-label"
+                            >{{_('Friendliness')}}</label
+                        >
+                        <input
+                            type="range"
+                            class="form-range"
+                            id="friendliness"
+                            name="friendliness"
+                            min="5"
+                            max="50"
+                            step="5"
+                            value="{{ user_rating.friendliness if user_rating else 25 }}"
+                            oninput="this.nextElementSibling.value = this.value/10"
+                        />
+                        <output
+                            >{{ (user_rating.friendliness if user_rating else
+                            25)/10 }}</output
+                        >/5
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="knowledge" class="form-label"
+                            >{{_('Knowledge')}}</label
+                        >
+                        <input
+                            type="range"
+                            class="form-range"
+                            id="knowledge"
+                            name="knowledge"
+                            min="5"
+                            max="50"
+                            step="5"
+                            value="{{ user_rating.knowledge if user_rating else 25 }}"
+                            oninput="this.nextElementSibling.value = this.value/10"
+                        />
+                        <output
+                            >{{ (user_rating.knowledge if user_rating else
+                            25)/10 }}</output
+                        >/5
+                    </div>
+                </div>
+
+                {% if user.verified %}
+                <div class="mb-3">
+                    <label for="comment" class="form-label"
+                        >{{_('Comment')}}</label
+                    >
+                    <textarea
+                        class="form-control"
+                        id="comment"
+                        name="comment"
+                        rows="3"
+                    >
 {{ user_rating.comment if user_rating else '' }}</textarea
-        >
+                    >
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    {{_('You must be a verified user to leave a comment.')}}
+                    <a href="/verify" class="alert-link"
+                        >{{_('Verify your account')}}</a
+                    >
+                </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary">
+                    {{_('Submit Rating')}}
+                </button>
+            </form>
+        </div>
     </div>
     {% else %}
-    <p>{{_('You must be a verified user to leave a comment.')}}</p>
+    <div class="alert alert-info">
+        {{_('Please')}}
+        <a href="#" onclick="openLoginPopup()">{{_('login')}}</a> {{_('to rate
+        this teacher')}}.
+    </div>
     {% endif %}
-    <div class="form-group">
-        <label for="english_proficiency">{{_('English Proficiency')}}</label>
-        <input
-            type="number"
-            class="form-control"
-            id="english_proficiency"
-            name="english_proficiency"
-            min="5"
-            max="50"
-            step="5"
-            required
-            value="{{ user_rating.english_proficiency if user_rating else 25 }}"
-        />
-    </div>
-    <div class="form-group">
-        <label for="friendliness">{{_('Friendliness')}}</label>
-        <input
-            type="number"
-            class="form-control"
-            id="friendliness"
-            name="friendliness"
-            min="5"
-            max="50"
-            step="5"
-            required
-            value="{{ user_rating.friendliness if user_rating else 25 }}"
-        />
-    </div>
-    <div class="form-group">
-        <label for="knowledge">{{_('Knowledge')}}</label>
-        <input
-            type="number"
-            class="form-control"
-            id="knowledge"
-            name="knowledge"
-            min="5"
-            max="50"
-            step="5"
-            required
-            value="{{ user_rating.knowledge if user_rating else 25 }}"
-        />
-    </div>
-    <button type="submit" class="btn btn-primary">
-        {{_('Submit Rating')}}
-    </button>
-</form>
-{% else %}
-<p>
-    {{_('Please')}}
-    <a href="#" onclick="openLoginPopup()">{{_('login')}}</a> {{_('to rate this
-    teacher')}}.
-</p>
-{% endif %} {% for rating in ratings %}
-<div class="card mb-3">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start">
-            <p class="card-text">{{ rating.comment }}</p>
-            <div>
-                {% if rating.user.verified %}
-                <span class="badge bg-success">{{_('Verified Student')}}</span>
-                {% elif user and user.id == rating.user_id %}
-                <a href="/verify" class="badge bg-warning text-dark"
-                    >{{_('Verify Account')}}</a
+
+    <!-- Reviews Section -->
+    <h3 class="mb-4">{{_('Reviews')}}</h3>
+    {% for rating in ratings %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="review-ratings">
+                    <span class="badge bg-primary me-2"
+                        >{{_('English')}}: {{ rating.english_proficiency/10
+                        }}/5</span
+                    >
+                    <span class="badge bg-success me-2"
+                        >{{_('Friendliness')}}: {{ rating.friendliness/10
+                        }}/5</span
+                    >
+                    <span class="badge bg-info"
+                        >{{_('Knowledge')}}: {{ rating.knowledge/10 }}/5</span
+                    >
+                </div>
+                <div>
+                    {% if rating.user.verified %}
+                    <span class="badge bg-success"
+                        >{{_('Verified Student')}}</span
+                    >
+                    {% elif user and user.id == rating.user_id %}
+                    <a href="/verify" class="badge bg-warning text-dark"
+                        >{{_('Verify Account')}}</a
+                    >
+                    {% else %}
+                    <span class="badge bg-secondary">{{_('Unverified')}}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if rating.comment %}
+            <p class="card-text mb-3">{{ rating.comment }}</p>
+            {% endif %}
+
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted"
+                    >{{_('Rated on')}} {{ rating.created_at.strftime('%Y-%m-%d
+                    %H:%M:%S') }}</small
                 >
-                {% else %}
-                <span class="badge bg-secondary">{{_('Unverified')}}</span>
-                {% endif %} {% if user and (user.id == rating.user_id or
-                user.admin == true) %}
+                {% if user and (user.id == rating.user_id or user.admin == true)
+                %}
                 <form
                     action="/teachers/{{ professor.id }}/ratings/{{ rating.id }}/delete"
                     method="post"
@@ -118,19 +234,26 @@ block content %}
                 {% endif %}
             </div>
         </div>
-        <p class="card-text">
-            {{_('English Proficiency')}}: {{ rating.english_proficiency }}
-        </p>
-        <p class="card-text">
-            {{_('Friendliness')}}: {{ rating.friendliness }}
-        </p>
-        <p class="card-text">{{_('Knowledge')}}: {{ rating.knowledge }}</p>
-        <p class="card-text">
-            <small class="text-muted"
-                >{{_('Rated on')}} {{ rating.created_at.strftime('%Y-%m-%d
-                %H:%M:%S') }}</small
-            >
-        </p>
     </div>
+    {% endfor %}
 </div>
-{% endfor %} {% endblock %}
+
+<style>
+    .rating-box {
+        background-color: #f8f9fa;
+        transition: transform 0.2s;
+    }
+    .rating-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-range {
+        width: 100%;
+    }
+    output {
+        display: inline-block;
+        min-width: 2.5em;
+    }
+</style>
+
+{% endblock %}

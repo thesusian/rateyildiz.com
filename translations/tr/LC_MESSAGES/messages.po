@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-11 19:24+0300\n"
-"PO-Revision-Date: 2024-10-11 19:25+0300\n"
+"POT-Creation-Date: 2024-10-29 22:46+0300\n"
+"PO-Revision-Date: 2024-10-29 22:46+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
 "Language-Team: tr <LL@li.org>\n"
@@ -18,172 +18,236 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: templates/account.html:1 templates/base.html:67
 msgid "Account"
-msgstr "Hesabim"
+msgstr "Hesap"
 
-#: templates/base.html:6 templates/base.html:28
-msgid "Rate Yildiz"
-msgstr "Yildiz'i Değerlendir"
+msgid "Account Information"
+msgstr "Hesap Bilgileri"
 
-#: templates/base.html:46 templates/leaderboard.html:1
-msgid "Leaderboard"
-msgstr "Sıralama"
+msgid "Email"
+msgstr "E-posta"
 
-#: templates/base.html:51 templates/professors.html:1
-msgid "Professors"
-msgstr "Profesörler"
+msgid "Account Type"
+msgstr "Hesap Türü"
 
-#: templates/base.html:76
-msgid "Login"
-msgstr "Giriş Yap"
+msgid "Admin"
+msgstr "Yönetici"
 
-#: templates/home.html:1
-msgid "Home"
-msgstr "Ana Sayfa"
+msgid "Status"
+msgstr "Durum"
 
-#: templates/leaderboard.html:19
-msgid "Professor Leaderboard"
-msgstr "Profesör Sıralaması"
+msgid "Verified"
+msgstr "Doğrulanmış"
 
-#: templates/leaderboard.html:23
-msgid "Rank"
-msgstr "Sıra"
+msgid "Student Email"
+msgstr "Öğrenci E-postası"
 
-#: templates/leaderboard.html:24 templates/professor_detail.html:1
-msgid "Professor"
-msgstr "Profesör"
-
-#: templates/leaderboard.html:25
-msgid "English"
-msgstr "İngilizce"
-
-#: templates/leaderboard.html:26 templates/professor_detail.html:16
-#: templates/professor_detail.html:48 templates/professor_detail.html:121
-msgid "Friendliness"
-msgstr "Arkadaşça Yaklaşım"
-
-#: templates/leaderboard.html:27 templates/professor_detail.html:20
-#: templates/professor_detail.html:62 templates/professor_detail.html:123
-msgid "Knowledge"
-msgstr "Bilgi"
-
-#: templates/leaderboard.html:28
-msgid "Total Average"
-msgstr "Toplam Ortalama"
-
-#: templates/professor_detail.html:10
-msgid "Professor Rating"
-msgstr "Profesör Değerlendirmesi"
-
-#: templates/professor_detail.html:12 templates/professor_detail.html:34
-#: templates/professor_detail.html:118
-msgid "English Proficiency"
-msgstr "İngilizce Yeterliliği"
-
-#: templates/professor_detail.html:25
-msgid "Rate this Professor"
-msgstr "Bu Profesörü Değerlendir"
-
-#: templates/professor_detail.html:28
-msgid "Comment"
-msgstr "Yorum"
-
-#: templates/professor_detail.html:76
-msgid "Submit Rating"
-msgstr "Değerlendirmeyi Gönder"
-
-#: templates/professor_detail.html:81
-msgid "Please"
-msgstr "Lütfen"
-
-#: templates/professor_detail.html:82
-msgid "login"
-msgstr "giriş yapın"
-
-#: templates/professor_detail.html:82
-msgid ""
-"to rate this\n"
-"    professor"
-msgstr ""
-"bu profesörü\n"
-"    değerlendirmek için"
-
-#: templates/professor_detail.html:92
-msgid "Verified Student"
-msgstr "Doğrulanmış Öğrenci"
-
-#: templates/professor_detail.html:95
-msgid "Verify Account"
-msgstr "Hesabı Doğrula"
-
-#: templates/professor_detail.html:98
-msgid "Unverified"
+msgid "Not Verified"
 msgstr "Doğrulanmamış"
 
-#: templates/professor_detail.html:109
-msgid "Are you sure you want to delete your rating?"
-msgstr "Değerlendirmenizi silmek istediğinizden emin misiniz?"
-
-#: templates/professor_detail.html:111
-msgid "Delete"
-msgstr "Sil"
-
-#: templates/professor_detail.html:126
-msgid "Rated on"
-msgstr "Değerlendirilme tarihi"
-
-#: templates/professors.html:14
-msgid "Search professors..."
-msgstr "Profesör ara..."
-
-#: templates/professors.html:19
-msgid "Search"
-msgstr "Ara"
-
-#: templates/professors.html:47
-msgid "View Details / Rate"
-msgstr "Detayları Görüntüle / Değerlendir"
-
-#: templates/professors.html:54
-msgid "No professors found."
-msgstr "Profesör bulunamadı."
-
-#: templates/verify.html:1
 msgid "Verify Student Email"
 msgstr "Öğrenci E-postasını Doğrula"
 
-#: templates/verify.html:3
+msgid "Logout"
+msgstr "Çıkış Yap"
+
+msgid "Please log in to view your account information."
+msgstr "Hesap bilgilerinizi görüntülemek için lütfen giriş yapın."
+
+msgid "Rate Yildiz"
+msgstr "Yıldız'ı Değerlendir"
+
+msgid "Leaderboard"
+msgstr "Sıralama"
+
+msgid "Teachers"
+msgstr "Öğretmenler"
+
+msgid "Faculties"
+msgstr "Fakülteler"
+
+msgid "Login"
+msgstr "Giriş Yap"
+
+msgid "contact"
+msgstr "iletişim"
+
+msgid "View Teachers"
+msgstr "Öğretmenleri Görüntüle"
+
+msgid "All Faculties"
+msgstr "Tüm Fakülteler"
+
+msgid "Rank"
+msgstr "Sıralama"
+
+msgid "Professor"
+msgstr "Profesör"
+
+msgid "English"
+msgstr "İngilizce"
+
+msgid "Friendliness"
+msgstr "Yaklaşım"
+
+msgid "Knowledge"
+msgstr "Bilgi"
+
+msgid "Total"
+msgstr "Toplam"
+
+msgid "Faculty Professors"
+msgstr "Fakülte Öğretim Üyeleri"
+
+msgid "Faculty Leaderboard"
+msgstr "Fakülte Sıralaması"
+
+msgid "Search all teachers..."
+msgstr "Tüm öğretmenleri ara..."
+
+msgid "Search"
+msgstr "Ara"
+
+msgid "View Details / Rate"
+msgstr "Detayları Görüntüle / Değerlendir"
+
+msgid "No teachers found in this faculty."
+msgstr "Bu fakültede öğretmen bulunamadı."
+
+msgid "Home"
+msgstr "Ana Sayfa"
+
+msgid "Rate YTU"
+msgstr "YTÜ'yü Değerlendir"
+
+msgid "A little website for rating teachers in YTU, don't take it\n        seriously"
+msgstr "YTÜ'deki öğretmenleri değerlendirmek için küçük bir website, çok ciddiye almayın"
+
+msgid "View All Professors"
+msgstr "Tüm Profesörleri Görüntüle"
+
+msgid "View By Faculty"
+msgstr "Fakülteye Göre Görüntüle"
+
+msgid "Search teachers..."
+msgstr "Öğretmen ara..."
+
+msgid "Top Rated Teachers"
+msgstr "En Yüksek Puanlı Öğretmenler"
+
+msgid "No teachers rated yet."
+msgstr "Henüz değerlendirilmiş öğretmen yok."
+
+msgid "View Full Leaderboard"
+msgstr "Tam Sıralamayı Görüntüle"
+
+msgid "Recent Reviews"
+msgstr "Son Değerlendirmeler"
+
+msgid "Anonymous"
+msgstr "Anonim"
+
+msgid "For Professor:"
+msgstr "Profesör İçin:"
+
+msgid "No recent reviews available."
+msgstr "Yakın zamanda yapılmış değerlendirme yok."
+
+msgid "About Rate Yildiz"
+msgstr "Rate Yildiz Hakkında"
+
+msgid "This a small website to rate teachers at Yildiz Technical\n            Univerity, why? for fun. You can translate the website to Turkish\n            from the menu above."
+msgstr "Bu, Yıldız Teknik Üniversitesi'ndeki öğretmenleri değerlendirmek için küçük bir website, neden mi? eğlence için. Websiteyi yukarıdaki menüden Türkçe'ye çevirebilirsiniz."
+
+msgid "By logging in, you can rate professors without comments, to be\n            able to comment you have to verify your account using your student\n            email ending with \"std.yildiz.edu.tr\", you can do that"
+msgstr "Giriş yaparak, yorum yapmadan profesörleri değerlendirebilirsiniz. Yorum yapabilmek için \"std.yildiz.edu.tr\" uzantılı öğrenci mailiniz ile hesabınızı doğrulamanız gerekir, bunu"
+
+msgid "on the Account page."
+msgstr "Hesap sayfasından yapabilirsiniz."
+
+msgid "And a final note, please don't make any mean comments, keep it\n            wholesome :D"
+msgstr "Ve son bir not, lütfen kırıcı yorumlar yapmayın, olumlu tutun :D"
+
+msgid "Professor Leaderboard"
+msgstr "Profesör Sıralaması"
+
+msgid "Teacher"
+msgstr "Öğretmen"
+
+msgid "Overall Rating"
+msgstr "Genel Değerlendirme"
+
+msgid "Rate this Teacher"
+msgstr "Bu Öğretmeni Değerlendir"
+
+msgid "English Proficiency"
+msgstr "İngilizce Yetkinliği"
+
+msgid "Comment"
+msgstr "Yorum"
+
+msgid "You must be a verified user to leave a comment."
+msgstr "Yorum yapabilmek için doğrulanmış kullanıcı olmanız gerekiyor."
+
+msgid "Verify your account"
+msgstr "Hesabınızı doğrulayın"
+
+msgid "Submit Rating"
+msgstr "Değerlendirmeyi Gönder"
+
+msgid "Please"
+msgstr "Lütfen"
+
+msgid "login"
+msgstr "giriş yapın"
+
+msgid "to rate\n        this teacher"
+msgstr "bu öğretmeni değerlendirmek için"
+
+msgid "Reviews"
+msgstr "Değerlendirmeler"
+
+msgid "Verified Student"
+msgstr "Doğrulanmış Öğrenci"
+
+msgid "Verify Account"
+msgstr "Hesabı Doğrula"
+
+msgid "Unverified"
+msgstr "Doğrulanmamış"
+
+msgid "Rated on"
+msgstr "Değerlendirme tarihi"
+
+msgid "Are you sure you want to delete your rating?"
+msgstr "Değerlendirmenizi silmek istediğinizden emin misiniz?"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "No teachers found."
+msgstr "Öğretmen bulunamadı."
+
 msgid "Verify Your Student Email"
 msgstr "Öğrenci E-postanızı Doğrulayın"
 
-#: templates/verify.html:12
 msgid "Yildiz Student Email"
-msgstr "Yildiz Öğrenci E-postası"
+msgstr "Yıldız Öğrenci E-postası"
 
-#: templates/verify.html:23
 msgid "Send Verification Code"
 msgstr "Doğrulama Kodu Gönder"
 
-#: templates/verify.html:30
 msgid "Verification Code"
 msgstr "Doğrulama Kodu"
 
-#: templates/verify.html:40
 msgid "Verify Code"
 msgstr "Kodu Doğrula"
 
-#: templates/verify.html:44
 msgid "Your student email"
 msgstr "Öğrenci e-postanız"
 
-#: templates/verify.html:44
-msgid ""
-"has been\n"
-"    verified"
-msgstr ""
-"doğrulandı"
+msgid "has been\n    verified"
+msgstr "doğrulandı"
 
-#: templates/verify.html:48
 msgid "Please log in to verify your student email"
 msgstr "Öğrenci e-postanızı doğrulamak için lütfen giriş yapın"
