@@ -28,7 +28,7 @@ block content %}
                                     <h5>{{_('English')}}</h5>
                                     <h3 class="text-primary">
                                         {{
-                                        "%.1f"|format(avg_ratings.avg_english/5
+                                        "%.1f"|format(avg_ratings.avg_english/10
                                         if avg_ratings.avg_english is not none
                                         else 0) }}/5
                                     </h3>
@@ -41,7 +41,7 @@ block content %}
                                     <h5>{{_('Friendliness')}}</h5>
                                     <h3 class="text-primary">
                                         {{
-                                        "%.1f"|format(avg_ratings.avg_friendliness/5
+                                        "%.1f"|format(avg_ratings.avg_friendliness/10
                                         if avg_ratings.avg_friendliness is not
                                         none else 0) }}/5
                                     </h3>
@@ -54,7 +54,7 @@ block content %}
                                     <h5>{{_('Knowledge')}}</h5>
                                     <h3 class="text-primary">
                                         {{
-                                        "%.1f"|format(avg_ratings.avg_knowledge/5
+                                        "%.1f"|format(avg_ratings.avg_knowledge/10
                                         if avg_ratings.avg_knowledge is not none
                                         else 0) }}/5
                                     </h3>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-29 22:46+0300\n"
+"POT-Creation-Date: 2024-11-02 20:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: templates/account.html:1 templates/base.html:85
+#: templates/404.html:2 templates/404.html:6
+msgid "Page Not Found"
+msgstr ""
+
+#: templates/404.html:7
+msgid ""
+"The page you are looking for might have been removed, had its name "
+"changed, or is temporarily unavailable."
+msgstr ""
+
+#: templates/404.html:8 templates/500.html:8
+msgid "Go to Homepage"
+msgstr ""
+
+#: templates/500.html:2
+msgid "Server Error"
+msgstr ""
+
+#: templates/500.html:6
+msgid "Internal Server Error"
+msgstr ""
+
+#: templates/500.html:7
+msgid "Something went wrong on our end. Please try again later."
+msgstr ""
+
+#: templates/account.html:1 templates/base.html:79
 msgid "Account"
 msgstr ""
 
@@ -69,6 +95,10 @@ msgstr ""
 msgid "Rate Yildiz"
 msgstr ""
 
+#: templates/base.html:51
+msgid "Toggle navigation"
+msgstr ""
+
 #: templates/base.html:59 templates/faculty_leaderboard.html:1
 #: templates/faculty_leaderboard.html:29 templates/leaderboard.html:1
 msgid "Leaderboard"
@@ -82,12 +112,39 @@ msgstr ""
 msgid "Faculties"
 msgstr ""
 
-#: templates/base.html:94
+#: templates/base.html:88 templates/base.html:183
 msgid "Login"
 msgstr ""
 
-#: templates/base.html:162
+#: templates/base.html:105
+msgid "UK Flag"
+msgstr ""
+
+#: templates/base.html:112 templates/faculty_leaderboard.html:48
+#: templates/faculty_leaderboard.html:99 templates/leaderboard.html:42
+#: templates/leaderboard.html:93 templates/teacher_detail.html:28
+#: templates/teacher_detail.html:184
+msgid "English"
+msgstr ""
+
+#: templates/base.html:126
+msgid "Turkish Flag"
+msgstr ""
+
+#: templates/base.html:133
+msgid "Türkçe"
+msgstr ""
+
+#: templates/base.html:156
+msgid "no rights reserved, feel free to copy anything"
+msgstr ""
+
+#: templates/base.html:158
 msgid "contact"
+msgstr ""
+
+#: templates/base.html:160
+msgid "contribute"
 msgstr ""
 
 #: templates/faculties.html:15
@@ -104,12 +161,6 @@ msgstr ""
 
 #: templates/faculty_leaderboard.html:46 templates/leaderboard.html:40
 msgid "Professor"
-msgstr ""
-
-#: templates/faculty_leaderboard.html:48 templates/faculty_leaderboard.html:99
-#: templates/leaderboard.html:42 templates/leaderboard.html:93
-#: templates/teacher_detail.html:28 templates/teacher_detail.html:184
-msgid "English"
 msgstr ""
 
 #: templates/faculty_leaderboard.html:51 templates/faculty_leaderboard.html:107
@@ -148,7 +199,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: templates/faculty_professors.html:58 templates/teachers.html:63
+#: templates/faculty_professors.html:58 templates/teachers.html:50
 msgid "View Details / Rate"
 msgstr ""
 
@@ -217,17 +268,17 @@ msgstr ""
 #: templates/home.html:99
 msgid ""
 "This a small website to rate teachers at Yildiz Technical\n"
-"            Univerity, why? for fun. You can translate the website to "
+"            Univerity. Why? for fun. You can translate the website to "
 "Turkish\n"
 "            from the menu above."
 msgstr ""
 
 #: templates/home.html:104
 msgid ""
-"By logging in, you can rate professors without comments, to be\n"
-"            able to comment you have to verify your account using your "
-"student\n"
-"            email ending with \"std.yildiz.edu.tr\", you can do that"
+"By logging in, you can rate professors without commenting. To\n"
+"            be able to comment, you have to verify your account using "
+"your\n"
+"            student email ending with (std.yildiz.edu.tr) you can do that"
 msgstr ""
 
 #: templates/home.html:107
@@ -238,6 +289,20 @@ msgstr ""
 msgid ""
 "And a final note, please don't make any mean comments, keep it\n"
 "            wholesome :D"
+msgstr ""
+
+#: templates/home.html:114
+msgid ""
+"If you want to edit something or contribute to the site you can\n"
+"            check out the"
+msgstr ""
+
+#: templates/home.html:117
+msgid "project on Github"
+msgstr ""
+
+#: templates/home.html:118
+msgid "it's opensource"
 msgstr ""
 
 #: templates/leaderboard.html:28
@@ -318,7 +383,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/teachers.html:72
+#: templates/teachers.html:57
 msgid "No teachers found."
 msgstr ""
 

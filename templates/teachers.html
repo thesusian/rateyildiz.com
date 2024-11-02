@@ -31,39 +31,24 @@ block content %}
     <!-- Teachers List -->
     <div class="row g-4">
         {% for professor in professors %}
-        <div class="col-12">
+        <div class="col-md-3 col-sm-6 col-12">
             <div class="card h-100 hover-shadow">
-                <div class="row g-0">
-                    <div class="col-md-2 col-sm-3">
-                        <img
-                            src="{{ 'https://avesis.yildiz.edu.tr/user/image/'+professor.image_id }}"
-                            class="img-fluid rounded-start"
-                            alt="{{ professor.full_name }}"
-                            style="
-                                width: 100%;
-                                height: 100%;
-                                max-height: 200px;
-                                object-fit: cover;
-                            "
-                            loading="lazy"
-                        />
-                    </div>
-                    <div class="col-md-10 col-sm-9">
-                        <div
-                            class="card-body d-flex flex-column justify-content-between h-100"
-                        >
-                            <div>
-                                <h5 class="card-title mb-3">
-                                    {{ professor.full_name }}
-                                </h5>
-                            </div>
-                            <a
-                                href="/teachers/info/{{ professor.id }}"
-                                class="btn btn-primary align-self-start"
-                                >{{_('View Details / Rate')}}</a
-                            >
-                        </div>
-                    </div>
+                <div class="text-center p-3">
+                    <img
+                        src="{{ 'https://avesis.yildiz.edu.tr/user/image/'+professor.image_id }}"
+                        class="img-fluid rounded-start"
+                        alt="{{ professor.full_name }}"
+                        style="width: 150px; height: 150px; object-fit: cover"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3">{{ professor.full_name }}</h5>
+                    <a
+                        href="/teachers/info/{{ professor.id }}"
+                        class="btn btn-primary"
+                        >{{_('View Details / Rate')}}</a
+                    >
                 </div>
             </div>
         </div>

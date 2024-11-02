@@ -38,6 +38,27 @@ faculty_dict = {
     15: "National Palaces and Historical Buildings Vocational School"
 }
 
+faculty_dict_tr = {
+    16: "Gemi İnşaatı ve Denizcilik Fakültesi",
+    10: "İnşaat Fakültesi",
+    3: "Kimya-Metalurji Fakültesi",
+    18: "Temiz Enerji Teknolojileri Enstitüsü",
+    1: "Rektörlük",
+    2: "Mimarlık Fakültesi",
+    4: "Makine Fakültesi",
+    5: "Fen Bilimleri Enstitüsü",
+    6: "Sosyal Bilimler Enstitüsü",
+    7: "Meslek Yüksekokulu",
+    8: "Elektrik-Elektronik Fakültesi",
+    9: "Fen-Edebiyat Fakültesi",
+    11: "İktisadi ve İdari Bilimler Fakültesi",
+    12: "Sanat ve Tasarım Fakültesi",
+    13: "Yabancı Diller Yüksekokulu",
+    14: "Eğitim Fakültesi",
+    23: "Uygulamalı Bilimler Fakültesi",
+    15: "Milli Saraylar ve Tarihi Yapılar Meslek Yüksekokulu"
+}
+
 # Load environment variables
 config = Config('.env')
 GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID', cast=str)
@@ -362,7 +383,7 @@ async def list_faculty_professors(request: Request, faculty_id: int, db: Session
         raise HTTPException(status_code=404, detail="Faculty not found")
 
     professors = crud.get_professors_by_faculty(db, faculty_id)
-    faculty_name = faculty_dict[faculty_id]
+    faculty_name = faculty_dict[faculty_id] if request.session['language']== 'en' else faculty_dict_tr[faculty_id]
     return templates.TemplateResponse("faculty_professors.html", {
         "request": request,
         "user": user,
@@ -378,7 +399,8 @@ async def list_faculties(request: Request):
     return templates.TemplateResponse("faculties.html", {
         "request": request,
         "user": user,
-        "faculties": faculty_dict
+        "faculties": faculty_dict if request.session['language']== 'en' else faculty_dict_tr
+
     })
 
 @app.get("/faculty/{faculty_id}/leaderboard", response_class=HTMLResponse)
@@ -388,7 +410,7 @@ async def faculty_leaderboard(request: Request, faculty_id: int, db: Session = D
     if faculty_id not in faculty_dict:
         raise HTTPException(status_code=404, detail="Faculty not found")
 
-    faculty_name = faculty_dict[faculty_id]
+    faculty_name = faculty_dict[faculty_id] if request.session['language']== 'en' else faculty_dict_tr[faculty_id]
     leaderboard_data = crud.get_faculty_leaderboard_data(db, faculty_id)
 
     return templates.TemplateResponse("faculty_leaderboard.html", {
@@ -398,6 +420,34 @@ async def faculty_leaderboard(request: Request, faculty_id: int, db: Session = D
         "leaderboard_data": leaderboard_data
     })
 
+@app.exception_handler(404)
+async def not_found_handler(request: Request, exc: HTTPException):
+    return templates.TemplateResponse(
+        "404.html",
+        {"request": request, "user": request.session.get('user')},
+        status_code=404
+    )
+
+@app.exception_handler(500)
+async def server_error_handler(request: Request, exc: Exception):
+    return templates.TemplateResponse(
+        "500.html",
+        {"request": request, "user": request.session.get('user')},
+        status_code=500
+    )
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    if exc.status_code == 404:
+        return await not_found_handler(request, exc)
+    return templates.TemplateResponse(
+        "500.html",
+        {
+            "request": request,
+            "user": request.session.get('user'),
+        },
+        status_code=exc.status_code
+    )
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

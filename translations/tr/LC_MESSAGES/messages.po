@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-29 22:46+0300\n"
-"PO-Revision-Date: 2024-10-29 22:46+0300\n"
+"POT-Creation-Date: 2024-11-02 20:30+0300\n"
+"PO-Revision-Date: 2024-11-02 20:30+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: tr\n"
 "Language-Team: tr <LL@li.org>\n"
@@ -18,236 +18,421 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
+#: templates/404.html:2 templates/404.html:6
+msgid "Page Not Found"
+msgstr "Sayfa Bulunamadı"
+
+#: templates/404.html:7
+msgid ""
+"The page you are looking for might have been removed, had its name "
+"changed, or is temporarily unavailable."
+msgstr "Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak kullanılamıyor olabilir."
+
+#: templates/404.html:8 templates/500.html:8
+msgid "Go to Homepage"
+msgstr "Ana Sayfaya Git"
+
+#: templates/500.html:2
+msgid "Server Error"
+msgstr "Sunucu Hatası"
+
+#: templates/500.html:6
+msgid "Internal Server Error"
+msgstr "Dahili Sunucu Hatası"
+
+#: templates/500.html:7
+msgid "Something went wrong on our end. Please try again later."
+msgstr "Bizim tarafımızda bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyiniz."
+
+#: templates/account.html:1 templates/base.html:79
 msgid "Account"
 msgstr "Hesap"
 
+#: templates/account.html:3
 msgid "Account Information"
 msgstr "Hesap Bilgileri"
 
+#: templates/account.html:8
 msgid "Email"
 msgstr "E-posta"
 
+#: templates/account.html:10
 msgid "Account Type"
 msgstr "Hesap Türü"
 
+#: templates/account.html:10
 msgid "Admin"
 msgstr "Yönetici"
 
+#: templates/account.html:12 templates/account.html:17
 msgid "Status"
 msgstr "Durum"
 
+#: templates/account.html:12
 msgid "Verified"
-msgstr "Doğrulanmış"
+msgstr "Doğrulandı"
 
+#: templates/account.html:14
 msgid "Student Email"
 msgstr "Öğrenci E-postası"
 
+#: templates/account.html:17
 msgid "Not Verified"
-msgstr "Doğrulanmamış"
+msgstr "Doğrulanmadı"
 
+#: templates/account.html:19 templates/verify.html:1
 msgid "Verify Student Email"
 msgstr "Öğrenci E-postasını Doğrula"
 
+#: templates/account.html:27
 msgid "Logout"
 msgstr "Çıkış Yap"
 
+#: templates/account.html:33
 msgid "Please log in to view your account information."
 msgstr "Hesap bilgilerinizi görüntülemek için lütfen giriş yapın."
 
+#: templates/base.html:11 templates/base.html:40
 msgid "Rate Yildiz"
 msgstr "Yıldız'ı Değerlendir"
 
+#: templates/base.html:51
+msgid "Toggle navigation"
+msgstr "Navigasyonu Aç/Kapat"
+
+#: templates/base.html:59 templates/faculty_leaderboard.html:1
+#: templates/faculty_leaderboard.html:29 templates/leaderboard.html:1
 msgid "Leaderboard"
 msgstr "Sıralama"
 
+#: templates/base.html:64 templates/teachers.html:1 templates/teachers.html:6
 msgid "Teachers"
 msgstr "Öğretmenler"
 
+#: templates/base.html:69 templates/faculties.html:1 templates/faculties.html:3
 msgid "Faculties"
 msgstr "Fakülteler"
 
+#: templates/base.html:88 templates/base.html:183
 msgid "Login"
 msgstr "Giriş Yap"
 
-msgid "contact"
-msgstr "iletişim"
+#: templates/base.html:105
+msgid "UK Flag"
+msgstr "İngiliz Bayrağı"
 
-msgid "View Teachers"
-msgstr "Öğretmenleri Görüntüle"
-
-msgid "All Faculties"
-msgstr "Tüm Fakülteler"
-
-msgid "Rank"
-msgstr "Sıralama"
-
-msgid "Professor"
-msgstr "Profesör"
-
+#: templates/base.html:112 templates/faculty_leaderboard.html:48
+#: templates/faculty_leaderboard.html:99 templates/leaderboard.html:42
+#: templates/leaderboard.html:93 templates/teacher_detail.html:28
+#: templates/teacher_detail.html:184
 msgid "English"
 msgstr "İngilizce"
 
-msgid "Friendliness"
-msgstr "Yaklaşım"
+#: templates/base.html:126
+msgid "Turkish Flag"
+msgstr "Türk Bayrağı"
 
+#: templates/base.html:133
+msgid "Türkçe"
+msgstr "Türkçe"
+
+#: templates/base.html:156
+msgid "no rights reserved, feel free to copy anything"
+msgstr "tüm hakları serbesttir, istediğinizi kopyalayabilirsiniz"
+
+#: templates/base.html:158
+msgid "contact"
+msgstr "iletişim"
+
+#: templates/base.html:160
+msgid "contribute"
+msgstr "katkıda bulun"
+
+#: templates/faculties.html:15
+msgid "View Teachers"
+msgstr "Öğretmenleri Görüntüle"
+
+#: templates/faculty_leaderboard.html:32 templates/faculty_professors.html:11
+msgid "All Faculties"
+msgstr "Tüm Fakülteler"
+
+#: templates/faculty_leaderboard.html:45 templates/leaderboard.html:39
+msgid "Rank"
+msgstr "Sıralama"
+
+#: templates/faculty_leaderboard.html:46 templates/leaderboard.html:40
+msgid "Professor"
+msgstr "Profesör"
+
+#: templates/faculty_leaderboard.html:51 templates/faculty_leaderboard.html:107
+#: templates/leaderboard.html:45 templates/leaderboard.html:101
+#: templates/teacher_detail.html:41 templates/teacher_detail.html:99
+#: templates/teacher_detail.html:188
+msgid "Friendliness"
+msgstr "Arkadaşlık"
+
+#: templates/faculty_leaderboard.html:54 templates/faculty_leaderboard.html:115
+#: templates/leaderboard.html:48 templates/leaderboard.html:109
+#: templates/teacher_detail.html:54 templates/teacher_detail.html:119
+#: templates/teacher_detail.html:192
 msgid "Knowledge"
 msgstr "Bilgi"
 
+#: templates/faculty_leaderboard.html:57 templates/faculty_leaderboard.html:123
+#: templates/leaderboard.html:51 templates/leaderboard.html:117
 msgid "Total"
 msgstr "Toplam"
 
+#: templates/faculty_professors.html:1
 msgid "Faculty Professors"
-msgstr "Fakülte Öğretim Üyeleri"
+msgstr "Fakülte Profesörleri"
 
+#: templates/faculty_professors.html:9
 msgid "Faculty Leaderboard"
 msgstr "Fakülte Sıralaması"
 
+#: templates/faculty_professors.html:23
 msgid "Search all teachers..."
 msgstr "Tüm öğretmenleri ara..."
 
+#: templates/faculty_professors.html:28 templates/home.html:30
+#: templates/teachers.html:25
 msgid "Search"
 msgstr "Ara"
 
+#: templates/faculty_professors.html:58 templates/teachers.html:50
 msgid "View Details / Rate"
 msgstr "Detayları Görüntüle / Değerlendir"
 
+#: templates/faculty_professors.html:65
 msgid "No teachers found in this faculty."
 msgstr "Bu fakültede öğretmen bulunamadı."
 
+#: templates/home.html:1
 msgid "Home"
 msgstr "Ana Sayfa"
 
+#: templates/home.html:4
 msgid "Rate YTU"
 msgstr "YTÜ'yü Değerlendir"
 
-msgid "A little website for rating teachers in YTU, don't take it\n        seriously"
-msgstr "YTÜ'deki öğretmenleri değerlendirmek için küçük bir website, çok ciddiye almayın"
+#: templates/home.html:6
+msgid ""
+"A little website for rating teachers in YTU, don't take it\n"
+"        seriously"
+msgstr ""
+"YTÜ'deki öğretmenleri değerlendirmek için küçük bir website, çok\n"
+"        ciddiye almayın"
 
+#: templates/home.html:11
 msgid "View All Professors"
 msgstr "Tüm Profesörleri Görüntüle"
 
+#: templates/home.html:14 templates/teachers.html:8
 msgid "View By Faculty"
 msgstr "Fakülteye Göre Görüntüle"
 
+#: templates/home.html:25 templates/teachers.html:21
 msgid "Search teachers..."
 msgstr "Öğretmen ara..."
 
+#: templates/home.html:40
 msgid "Top Rated Teachers"
-msgstr "En Yüksek Puanlı Öğretmenler"
+msgstr "En Çok Değerlendirilen Öğretmenler"
 
+#: templates/home.html:67
 msgid "No teachers rated yet."
 msgstr "Henüz değerlendirilmiş öğretmen yok."
 
+#: templates/home.html:71
 msgid "View Full Leaderboard"
 msgstr "Tam Sıralamayı Görüntüle"
 
+#: templates/home.html:76
 msgid "Recent Reviews"
 msgstr "Son Değerlendirmeler"
 
+#: templates/home.html:81
 msgid "Anonymous"
 msgstr "Anonim"
 
+#: templates/home.html:84
 msgid "For Professor:"
-msgstr "Profesör İçin:"
+msgstr "Profesör için:"
 
+#: templates/home.html:93
 msgid "No recent reviews available."
 msgstr "Yakın zamanda yapılmış değerlendirme yok."
 
+#: templates/home.html:97
 msgid "About Rate Yildiz"
 msgstr "Rate Yildiz Hakkında"
 
-msgid "This a small website to rate teachers at Yildiz Technical\n            Univerity, why? for fun. You can translate the website to Turkish\n            from the menu above."
-msgstr "Bu, Yıldız Teknik Üniversitesi'ndeki öğretmenleri değerlendirmek için küçük bir website, neden mi? eğlence için. Websiteyi yukarıdaki menüden Türkçe'ye çevirebilirsiniz."
+#: templates/home.html:99
+msgid ""
+"This a small website to rate teachers at Yildiz Technical\n"
+"            Univerity. Why? for fun. You can translate the website to "
+"Turkish\n"
+"            from the menu above."
+msgstr ""
+"Bu, Yıldız Teknik Üniversitesi'ndeki öğretmenleri değerlendirmek için\n"
+"            küçük bir website. Neden? Eğlence için. Websiteyi yukarıdaki\n"
+"            menüden Türkçe'ye çevirebilirsiniz."
 
-msgid "By logging in, you can rate professors without comments, to be\n            able to comment you have to verify your account using your student\n            email ending with \"std.yildiz.edu.tr\", you can do that"
-msgstr "Giriş yaparak, yorum yapmadan profesörleri değerlendirebilirsiniz. Yorum yapabilmek için \"std.yildiz.edu.tr\" uzantılı öğrenci mailiniz ile hesabınızı doğrulamanız gerekir, bunu"
+#: templates/home.html:104
+msgid ""
+"By logging in, you can rate professors without commenting. To\n"
+"            be able to comment, you have to verify your account using "
+"your\n"
+"            student email ending with (std.yildiz.edu.tr) you can do that"
+msgstr ""
+"Giriş yaparak, yorum yapmadan profesörleri değerlendirebilirsiniz. Yorum\n"
+"            yapabilmek için, hesabınızı (std.yildiz.edu.tr) ile biten öğrenci\n"
+"            mailiniz ile doğrulamanız gerekiyor, bunu"
 
+#: templates/home.html:107
 msgid "on the Account page."
 msgstr "Hesap sayfasından yapabilirsiniz."
 
-msgid "And a final note, please don't make any mean comments, keep it\n            wholesome :D"
-msgstr "Ve son bir not, lütfen kırıcı yorumlar yapmayın, olumlu tutun :D"
+#: templates/home.html:110
+msgid ""
+"And a final note, please don't make any mean comments, keep it\n"
+"            wholesome :D"
+msgstr ""
+"Ve son bir not, lütfen kırıcı yorumlar yapmayın, olumlu\n"
+"            tutun :D"
 
+#: templates/home.html:114
+msgid ""
+"If you want to edit something or contribute to the site you can\n"
+"            check out the"
+msgstr ""
+"Bir şey düzenlemek veya siteye katkıda bulunmak istiyorsanız\n"
+"            bakabilirsiniz"
+
+#: templates/home.html:117
+msgid "project on Github"
+msgstr "Github'daki proje"
+
+#: templates/home.html:118
+msgid "it's opensource"
+msgstr "açık kaynak kodlu"
+
+#: templates/leaderboard.html:28
 msgid "Professor Leaderboard"
 msgstr "Profesör Sıralaması"
 
+#: templates/teacher_detail.html:1
 msgid "Teacher"
 msgstr "Öğretmen"
 
+#: templates/teacher_detail.html:22
 msgid "Overall Rating"
 msgstr "Genel Değerlendirme"
 
+#: templates/teacher_detail.html:74
 msgid "Rate this Teacher"
 msgstr "Bu Öğretmeni Değerlendir"
 
+#: templates/teacher_detail.html:79
 msgid "English Proficiency"
-msgstr "İngilizce Yetkinliği"
+msgstr "İngilizce Yeterliliği"
 
+#: templates/teacher_detail.html:142
 msgid "Comment"
 msgstr "Yorum"
 
+#: templates/teacher_detail.html:155
 msgid "You must be a verified user to leave a comment."
-msgstr "Yorum yapabilmek için doğrulanmış kullanıcı olmanız gerekiyor."
+msgstr "Yorum yapabilmek için doğrulanmış kullanıcı olmanız gerekmektedir."
 
+#: templates/teacher_detail.html:157
 msgid "Verify your account"
 msgstr "Hesabınızı doğrulayın"
 
+#: templates/teacher_detail.html:163
 msgid "Submit Rating"
 msgstr "Değerlendirmeyi Gönder"
 
+#: templates/teacher_detail.html:170
 msgid "Please"
 msgstr "Lütfen"
 
+#: templates/teacher_detail.html:171
 msgid "login"
 msgstr "giriş yapın"
 
-msgid "to rate\n        this teacher"
-msgstr "bu öğretmeni değerlendirmek için"
+#: templates/teacher_detail.html:171
+msgid ""
+"to rate\n"
+"        this teacher"
+msgstr ""
+"bu öğretmeni\n"
+"        değerlendirmek için"
 
+#: templates/teacher_detail.html:177
 msgid "Reviews"
 msgstr "Değerlendirmeler"
 
+#: templates/teacher_detail.html:198
 msgid "Verified Student"
 msgstr "Doğrulanmış Öğrenci"
 
+#: templates/teacher_detail.html:202
 msgid "Verify Account"
 msgstr "Hesabı Doğrula"
 
+#: templates/teacher_detail.html:205
 msgid "Unverified"
 msgstr "Doğrulanmamış"
 
+#: templates/teacher_detail.html:216
 msgid "Rated on"
-msgstr "Değerlendirme tarihi"
+msgstr "Değerlendirilme tarihi"
 
+#: templates/teacher_detail.html:229
 msgid "Are you sure you want to delete your rating?"
 msgstr "Değerlendirmenizi silmek istediğinizden emin misiniz?"
 
+#: templates/teacher_detail.html:231
 msgid "Delete"
 msgstr "Sil"
 
+#: templates/teachers.html:57
 msgid "No teachers found."
 msgstr "Öğretmen bulunamadı."
 
+#: templates/verify.html:3
 msgid "Verify Your Student Email"
 msgstr "Öğrenci E-postanızı Doğrulayın"
 
+#: templates/verify.html:12
 msgid "Yildiz Student Email"
 msgstr "Yıldız Öğrenci E-postası"
 
+#: templates/verify.html:23
 msgid "Send Verification Code"
 msgstr "Doğrulama Kodu Gönder"
 
+#: templates/verify.html:30
 msgid "Verification Code"
 msgstr "Doğrulama Kodu"
 
+#: templates/verify.html:40
 msgid "Verify Code"
 msgstr "Kodu Doğrula"
 
+#: templates/verify.html:44
 msgid "Your student email"
 msgstr "Öğrenci e-postanız"
 
-msgid "has been\n    verified"
-msgstr "doğrulandı"
+#: templates/verify.html:44
+msgid ""
+"has been\n"
+"    verified"
+msgstr ""
+"doğrulandı"
 
+#: templates/verify.html:48
 msgid "Please log in to verify your student email"
 msgstr "Öğrenci e-postanızı doğrulamak için lütfen giriş yapın"
