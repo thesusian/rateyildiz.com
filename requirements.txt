@@ -13,3 +13,4 @@ resend
 python-jose
 python-multipart
 bs4
+pybabel
