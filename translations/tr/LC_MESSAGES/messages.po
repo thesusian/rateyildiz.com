@@ -141,8 +141,8 @@ msgid "no rights reserved, feel free to copy anything"
 msgstr "tüm hakları serbesttir, istediğinizi kopyalayabilirsiniz"
 
 #: templates/base.html:158
-msgid "contact"
-msgstr "iletişim"
+msgid "Contact"
+msgstr "İletişim"
 
 #: templates/base.html:160
 msgid "contribute"
