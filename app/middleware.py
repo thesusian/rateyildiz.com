@@ -11,6 +11,8 @@ class LanguageMiddleware(BaseHTTPMiddleware):
         self.templates = templates
 
     async def dispatch(self, request: Request, call_next):
+        if 'language' not in request.session: request.session['language'] = 'tr'
+
         lang = request.session.get('language') or request.headers.get("Accept-Language", "en")
         await set_locale(request, lang)
 
