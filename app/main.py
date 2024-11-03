@@ -114,6 +114,10 @@ async def sitemap():
 async def favicon():
     return Response(content=open("static/favicon.ico", "rb").read(), media_type="image/x-icon")
 
+@app.get("/privacy", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("privacy.html", {"request": request})
+
 @app.post("/set-lang/{lang}")
 async def set_language(lang: str, request: Request, response: Response):
     if lang not in ['en', 'tr']:

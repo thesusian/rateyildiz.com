@@ -5,3 +5,4 @@ __pycache__
 .stfolder
 gunicorn.pid
 logs
+deploy.sh

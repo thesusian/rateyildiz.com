@@ -145,20 +145,23 @@
         </div>
 
         <footer
-            class="bg-light border-top border-2 border-dark bg-gradient p-2 d-flex justify-content-center align-items-center gap-4"
+            class="bg-light border-top border-2 border-dark bg-gradient p-2 d-flex flex-column align-items-center gap-4"
+            style="font-size: 0.8rem"
         >
             <a href="https://htmx.org"
                 ><img
                     src="/static/createdwithhtmx.jpeg"
                     style="max-height: 40px"
             /></a>
-            <span
-                >{{ _('no rights reserved, feel free to copy anything') }}</span
-            >
-            <a href="mailto:thesusian@riseup.net">{{_('contact')}}</a>
-            <a href="https://github.com/thesusian/rateyildiz.com"
-                >{{_('contribute')}}</a
-            >
+            <div>
+                <span
+                    >{{ _('no rights reserved, feel free to copy anything')
+                    }}</span
+                >|<a href="mailto:thesusian@riseup.net">{{_('contact')}}</a>|<a
+                    href="https://github.com/thesusian/rateyildiz.com"
+                    >{{_('contribute')}}</a
+                >
+            </div>
         </footer>
 
         <style>
