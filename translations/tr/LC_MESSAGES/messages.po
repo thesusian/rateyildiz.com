@@ -225,8 +225,8 @@ msgstr ""
 "        ciddiye almayın"
 
 #: templates/home.html:11
-msgid "View All Professors"
-msgstr "Tüm Profesörleri Görüntüle"
+msgid "View All Teachers"
+msgstr "Tüm Öğretmenleri Görüntüle"
 
 #: templates/home.html:14 templates/teachers.html:8
 msgid "View By Faculty"
