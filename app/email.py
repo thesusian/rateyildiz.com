@@ -10,7 +10,7 @@ resend.api_key = os.getenv("RESEND_API_KEY")
 def send_verification_email(to_email: str, verification_code: str):
     try:
         resend.Emails.send({
-            "from": "Rate Yildiz <noreply@resend.dev>",
+            "from": "Rate Yildiz <noreply@rateyildiz.com>",
             "to": to_email,
             "subject": "Verify your student email for Rate Yildiz",
             "html": f"""
