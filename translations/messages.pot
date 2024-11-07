@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-03 18:51+0300\n"
+"POT-Creation-Date: 2024-11-07 21:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,19 +120,8 @@ msgstr ""
 msgid "UK Flag"
 msgstr ""
 
-#: templates/base.html:117 templates/faculty_leaderboard.html:48
-#: templates/faculty_leaderboard.html:99 templates/leaderboard.html:42
-#: templates/leaderboard.html:93 templates/teacher_detail.html:28
-#: templates/teacher_detail.html:184
-msgid "English"
-msgstr ""
-
 #: templates/base.html:131
 msgid "Turkish Flag"
-msgstr ""
-
-#: templates/base.html:138
-msgid "Türkçe"
 msgstr ""
 
 #: templates/base.html:163
@@ -157,6 +146,13 @@ msgstr ""
 
 #: templates/faculty_leaderboard.html:46 templates/leaderboard.html:40
 msgid "Professor"
+msgstr ""
+
+#: templates/faculty_leaderboard.html:48 templates/faculty_leaderboard.html:99
+#: templates/leaderboard.html:42 templates/leaderboard.html:93
+#: templates/teacher_detail.html:28 templates/teacher_detail.html:79
+#: templates/teacher_detail.html:184
+msgid "Teaching Skills"
 msgstr ""
 
 #: templates/faculty_leaderboard.html:51 templates/faculty_leaderboard.html:107
@@ -316,10 +312,6 @@ msgstr ""
 
 #: templates/teacher_detail.html:74
 msgid "Rate this Teacher"
-msgstr ""
-
-#: templates/teacher_detail.html:79
-msgid "English Proficiency"
 msgstr ""
 
 #: templates/teacher_detail.html:142
