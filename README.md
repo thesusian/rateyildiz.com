@@ -8,6 +8,8 @@ This whole thing needs a refactor, I did make some changes on the way, like chan
 but I only changed the UI, I couldn't bother with migrating the database. Another inconsistency you might notice is
 the "Professors" in the backend are called "Teachers", this happened after I realized Avesis has assistant info too.
 
+You can read more on [my website](https://thesusian.com/post/rateyildiz/)
+
 ## To Do
 
 * cache the leaderboards, they are too expensive
